@@ -1,5 +1,7 @@
 package org.example.crazybarbershop.validators.UsersValidation.impl;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.example.crazybarbershop.validators.UsersValidation.UserValidator;
 
 import java.util.regex.Pattern;

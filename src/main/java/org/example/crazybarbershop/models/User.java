@@ -2,6 +2,8 @@ package org.example.crazybarbershop.models;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -21,5 +23,9 @@ public class User {
     private String email;
 
     private String password;
+
+    private LocalDate birthday;
+
+    private String gender;
 
 }

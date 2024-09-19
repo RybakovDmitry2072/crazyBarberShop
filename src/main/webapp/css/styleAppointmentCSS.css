@@ -1,0 +1,89 @@
+/* Основные стили для тела страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Основной контейнер */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Список сотрудников */
+.employee-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Карточка сотрудника */
+.employee-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 20px;
+    flex: 1 1 calc(33% - 30px);
+    text-align: center;
+    transition: transform 0.3s;
+    /* Добавим цвет фона и тень для выделения */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+/* Эффект при наведении на карточку */
+.employee-card:hover {
+    transform: translateY(-5px);
+    background-color: #e0f7fa; /* Легкий голубой цвет при наведении */
+}
+
+/* Фото сотрудника */
+.employee-photo {
+    width: 150px; /* Ширина фото */
+    height: 150px; /* Высота фото */
+    object-fit: cover; /* Обрезка изображения */
+    border-radius: 50%; /* Округление изображения */
+    margin-bottom: 15px;
+}
+
+/* Кнопка записи */
+.book-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+/* Эффект при наведении на кнопку записи */
+.book-button:hover {
+    background-color: #218838;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .employee-card {
+        flex: 1 1 calc(50% - 30px);
+    }
+}
+
+@media (max-width: 480px) {
+    .employee-card {
+        flex: 1 1 100%;
+    }
+}

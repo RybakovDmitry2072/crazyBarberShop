@@ -10,9 +10,9 @@ public interface EmploeeRepository {
 
     void save(Emploee emploee);
 
-    List<User> findAll();
+    List<Emploee> findAll();
 
-    User findById(String id);
+    Emploee findById(String id);
 
     void delete(String id);
 
