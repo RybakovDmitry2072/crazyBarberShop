@@ -28,8 +28,18 @@
                 <p><strong>Должность:</strong> ${emploeeDto.position}</p>
                 <p><strong>Телефон:</strong> ${emploeeDto.phoneNumber}</p>
 
-                <form action="${pageContext.request.contextPath}/appointment" method="POST">
-                    <%--@declare id="timeslot"--%><input type="hidden" name="employeeId" value="${emploeeDto.id}">
+                <form action="${pageContext.request.contextPath}/appointment" method="POST" class="form-container">
+                        <%-- Категория --%>
+                    <%--@declare id="category"--%><%--@declare id="timeslot"--%><label for="category">Выберите категорию:</label>
+                    <select name="category" required>
+                        <option value="">-- Выберите категорию --</option>
+                        <c:forEach var="category" items="${categories}">
+                            <option value="${category.id}">${category.name}</option>
+                        </c:forEach>
+                    </select>
+
+                        <%-- Время --%>
+                    <input type="hidden" name="employeeId" value="${emploeeDto.id}">
                     <label for="timeSlot">Выберите время:</label>
                     <select name="timeSlot" required>
                         <option value="">-- Выберите время --</option>
@@ -37,6 +47,8 @@
                             <option value="${slot.id}">${slot.startTime}</option>
                         </c:forEach>
                     </select>
+
+                        <%-- Кнопка отправки --%>
                     <button type="submit" class="book-button">Записаться</button>
                 </form>
             </div>

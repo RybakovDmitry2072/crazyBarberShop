@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DataBaseConnection {
-
     @Getter
     private static HikariDataSource dataSource;
     private static String url;
@@ -40,16 +39,17 @@ public class DataBaseConnection {
         hikariConfig.setPassword(password);
         hikariConfig.setJdbcUrl(url);
         hikariConfig.setDriverClassName("org.postgresql.Driver");
-
-        hikariConfig.setMaximumPoolSize(40);
+        hikariConfig.setMaximumPoolSize(10); // Попробуйте уменьшить
         hikariConfig.setMinimumIdle(5);
-        hikariConfig.setConnectionTimeout(30000);
-        hikariConfig.setLeakDetectionThreshold(2000);
-
-
+        hikariConfig.setConnectionTimeout(30000); // Время ожидания подключения
+        hikariConfig.setIdleTimeout(600000); // Время ожидания неиспользуемых соединений
+        hikariConfig.setMaxLifetime(1800000); // Максимальное время жизни соединения
+        hikariConfig.setLeakDetectionThreshold(2000); // Время для выявления утечек
+        hikariConfig.setMaximumPoolSize(40);
 
         dataSource = new HikariDataSource(hikariConfig);
     }
+
 
     // Метод для получения соединения с базой данных
     public static Connection getConnection() throws SQLException {
