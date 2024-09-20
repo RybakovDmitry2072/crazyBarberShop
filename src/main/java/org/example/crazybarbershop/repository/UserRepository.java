@@ -12,6 +12,8 @@ public interface UserRepository {
 
     User findByLogin(String login);
 
+    User findByEmail(String email);
+
     void delete(String login);
 
 }

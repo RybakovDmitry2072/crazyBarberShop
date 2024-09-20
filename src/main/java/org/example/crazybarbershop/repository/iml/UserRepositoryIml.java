@@ -13,15 +13,13 @@ public class UserRepositoryIml implements UserRepository {
     private static final String QUERY_DELETE = "DELETE FROM \"user\" WHERE login = ?";
 
     private static final String QUERY_SAVE = "INSERT INTO \"user\" (name, surname, login, phone_number, email, password, birthday, gender) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?) " +
-            "ON CONFLICT (login) DO UPDATE SET " +
-            "name = EXCLUDED.name, surname = EXCLUDED.surname, phone_number = EXCLUDED.phone_number, " +
-            "email = EXCLUDED.email, password = EXCLUDED.password, birthday = EXCLUDED.birthday, " +
-            "gender = EXCLUDED.gender";
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
 
     private static final String QUERY_FIND_ALL = "SELECT * FROM \"user\"";
 
     private static final String QUERY_BY_LOGIN = "SELECT * FROM \"user\" WHERE login = ?";
+
+    private static final String QUERY_BY_EMAIL = "SELECT * FROM \"user\" WHERE email = ?";
 
     private final DataSource dataSource;
 
@@ -96,6 +94,28 @@ public class UserRepositoryIml implements UserRepository {
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, login);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user = UserMapperBD.mapRow(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        User user = null;
+        String query = QUERY_BY_EMAIL;
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

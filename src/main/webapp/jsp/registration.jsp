@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">
@@ -36,7 +37,7 @@
 
         <div class="form-group">
             <label for="phone">Номер телефона:</label>
-            <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
+            <input type="tel" id="phone" name="phone" required>
         </div>
 
         <div class="form-group">
@@ -46,7 +47,7 @@
 
         <div class="form-group">
             <label for="dob">Дата рождения:</label>
-            <input type="date" id="dob" name="dob" required>
+            <input type="date" id="dob" name="dob" required min="1900-01-01" max="2023-12-31">
         </div>
 
         <!-- Пол для выбора пола -->
@@ -61,6 +62,13 @@
         </div>
     </form>
 </div>
-
+<c:if test="${not empty requestScope.errors}">
+    <div class="error-message">
+        <c:forEach var="error" items="${requestScope.errors}">
+            <span>${error.message}</span>
+            <br>
+        </c:forEach>
+    </div>
+</c:if>
 </body>
 </html>

@@ -17,7 +17,7 @@ public class Appointment {
     private int userId; // Идентификатор пользователя
 
     private Category categoryId; // Категория
-    
+
     private int EmploeeId; //Индефикатор работника
 
     private TimeSlot timeSlot; // Время записи

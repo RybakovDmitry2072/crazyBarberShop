@@ -6,4 +6,5 @@ public interface RegistrationUserService {
 
     void registerUser(UserRegistrationData data);
 
+
 }
