@@ -3,7 +3,6 @@ package org.example.crazybarbershop.util;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,14 +39,14 @@ public class DataBaseConnection {
         hikariConfig.setUsername(username);
         hikariConfig.setPassword(password);
         hikariConfig.setJdbcUrl(url);
-
-        hikariConfig.setConnectionTimeout(30000); // Максимальное время ожидания в миллисекундах
-        hikariConfig.setIdleTimeout(600000);      // Время простоя соединений перед их закрытием
-        hikariConfig.setMaxLifetime(1800000);     // Максимальное время жизни соединений
-        hikariConfig.setLeakDetectionThreshold(2000); // Уведомление, если соединение не закрыто в течение 2 секунд
-
         hikariConfig.setDriverClassName("org.postgresql.Driver");
-        hikariConfig.setMaximumPoolSize(20);
+
+        hikariConfig.setMaximumPoolSize(40);
+        hikariConfig.setMinimumIdle(5);
+        hikariConfig.setConnectionTimeout(30000);
+        hikariConfig.setLeakDetectionThreshold(2000);
+
+
 
         dataSource = new HikariDataSource(hikariConfig);
     }

@@ -46,12 +46,6 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
     }
 
     @Override
-    public List<TimeSlot> findAllFreeTimeSlots() {
-        // Реализуйте логику поиска свободных временных слотов
-        return List.of(); // Возвращает пустой список по умолчанию
-    }
-
-    @Override
     public void save(Emploee emploee) {
         String query = QUERY_SAVE;
 

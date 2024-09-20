@@ -16,6 +16,5 @@ public interface EmploeeRepository {
 
     void delete(String id);
 
-    List<TimeSlot> findAllFreeTimeSlots();
 
 }

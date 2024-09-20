@@ -10,6 +10,7 @@ public class EmployeeDtoFactory {
 
         return EmploeeDto.builder()
                 .name(emploee.getName())
+                .id(emploee.getId())
                 .gender(emploee.getGender())
                 .surname(emploee.getName())
                 .position(emploee.getPosition())
