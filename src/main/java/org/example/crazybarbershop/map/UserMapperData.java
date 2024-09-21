@@ -2,6 +2,10 @@ package org.example.crazybarbershop.map;
 
 import org.example.crazybarbershop.data.UserRegistrationData;
 import org.example.crazybarbershop.models.User;
+import org.example.crazybarbershop.util.LocalDateFormatter;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class UserMapperData  {
 
@@ -14,7 +18,7 @@ public class UserMapperData  {
                 .email(data.getEmail())
                 .password(data.getPassword())
                 .phoneNumber(data.getPhoneNumber())
-                .birthday(data.getBirthday())
+                .birthday(LocalDateFormatter.format(data.getBirthday()))
                 .gender(data.getGender())
                 .build();
 

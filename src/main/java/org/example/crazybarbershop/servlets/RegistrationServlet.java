@@ -13,6 +13,7 @@ import org.example.crazybarbershop.services.impl.RegistrationUserServiceimpl;
 import org.example.crazybarbershop.services.interfaces.RegistrationUserService;
 import org.example.crazybarbershop.util.DataBaseConnection;
 import org.example.crazybarbershop.util.JSPHelper;
+import org.example.crazybarbershop.util.LocalDateFormatter;
 import org.example.crazybarbershop.validators.UsersValidation.impl.CreateUserValidatorImpl;
 import org.example.crazybarbershop.validators.UsersValidation.interfecies.CreateUserValidator;
 
@@ -38,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
                 .email(req.getParameter("email"))
                 .password(req.getParameter("password"))
                 .phoneNumber(req.getParameter("phone"))
-                .birthday(LocalDate.parse(req.getParameter("dob")))
+                .birthday(req.getParameter("dob"))
                 .gender(req.getParameter("gender"))
                 .build();
 

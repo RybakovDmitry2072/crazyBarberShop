@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <label for="dob">Дата рождения:</label>
-            <input type="date" id="dob" name="dob" required min="1900-01-01" max="2023-12-31">
+            <input type="date" id="dob" name="dob" required>
         </div>
 
         <!-- Пол для выбора пола -->
