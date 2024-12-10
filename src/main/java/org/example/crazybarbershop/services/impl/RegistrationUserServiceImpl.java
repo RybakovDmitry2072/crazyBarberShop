@@ -5,23 +5,21 @@ import org.example.crazybarbershop.Exceptions.ValidatiounException;
 import org.example.crazybarbershop.data.UserRegistrationData;
 import org.example.crazybarbershop.map.UserMapperData;
 import org.example.crazybarbershop.models.User;
-import org.example.crazybarbershop.repository.UserRepository;
+import org.example.crazybarbershop.repository.interfaces.UserRepository;
 import org.example.crazybarbershop.services.interfaces.RegistrationUserService;
-import org.example.crazybarbershop.util.HashPassword;
 import org.example.crazybarbershop.validators.UsersValidation.ValidationResult;
-import org.example.crazybarbershop.validators.UsersValidation.interfecies.CreateUserValidator;
+import org.example.crazybarbershop.validators.UsersValidation.impl.UserRegistrationValidator;
+import org.mindrot.jbcrypt.BCrypt;
 
 @AllArgsConstructor
-public class RegistrationUserServiceimpl implements RegistrationUserService {
+public class RegistrationUserServiceImpl implements RegistrationUserService {
 
     private UserRepository userRepository;
-
-    private CreateUserValidator createUserValidator;
 
     @Override
     public void registerUser(UserRegistrationData data) {
 
-        ValidationResult validationResult = createUserValidator.isValid(data);
+        ValidationResult validationResult = UserRegistrationValidator.getInstance().isValid(data);
 
         if (!validationResult.isValid()) {
 
@@ -30,7 +28,7 @@ public class RegistrationUserServiceimpl implements RegistrationUserService {
         }
 
         User user = UserMapperData.mapFrom(data);
-        user.setPassword(HashPassword.hashPassword(user.getPassword()));
+        user.setPassword(BCrypt.hashpw(user.getPassword(),BCrypt.gensalt()));
         userRepository.save(user);
 
     }

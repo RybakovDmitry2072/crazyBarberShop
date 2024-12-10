@@ -1,7 +1,7 @@
 package org.example.crazybarbershop.repository.iml;
 
 import org.example.crazybarbershop.models.Appointment;
-import org.example.crazybarbershop.repository.AppointmentRepository;
+import org.example.crazybarbershop.repository.interfaces.AppointmentRepository;
 
 import javax.sql.DataSource;
 import java.util.List;

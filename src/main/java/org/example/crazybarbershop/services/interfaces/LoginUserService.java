@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface LoginUserService {
 
-    UserDto login(String login, String password);
+    boolean login(String login, String password);
 
 }

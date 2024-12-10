@@ -4,22 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Appointment {
+@Data
+public class Role {
 
     private int id;
 
-    private User user;
-
-    private Category category;
-
-    private Employee Employee;
-
-    private TimeSlot timeSlot;
+    private String role;
 
 }

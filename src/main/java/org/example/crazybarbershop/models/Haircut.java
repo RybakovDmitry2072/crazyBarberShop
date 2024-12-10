@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Haircut {
 
+    private int id;
+
     private String name;
 
     private String description;

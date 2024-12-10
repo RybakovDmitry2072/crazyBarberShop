@@ -1,7 +1,7 @@
 package org.example.crazybarbershop.services.impl;
 
 import org.example.crazybarbershop.data.AppointmentData;
-import org.example.crazybarbershop.repository.AppointmentRepository;
+import org.example.crazybarbershop.repository.interfaces.AppointmentRepository;
 import org.example.crazybarbershop.services.interfaces.AppointmentService;
 
 public class AppointmentServiceImpl implements AppointmentService {

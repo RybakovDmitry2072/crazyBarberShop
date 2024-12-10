@@ -1,20 +1,19 @@
 package org.example.crazybarbershop.FactoryDto;
 
 import org.example.crazybarbershop.dto.EmploeeDto;
-import org.example.crazybarbershop.models.Emploee;
-import org.example.crazybarbershop.models.User;
+import org.example.crazybarbershop.models.Employee;
 
 public class EmployeeDtoFactory {
 
-    public static EmploeeDto factoryDto(Emploee emploee){
+    public static EmploeeDto factoryDto(Employee employee){
 
         return EmploeeDto.builder()
-                .name(emploee.getName())
-                .id(emploee.getId())
-                .gender(emploee.getGender())
-                .surname(emploee.getName())
-                .position(emploee.getPosition())
-                .urlImage(emploee.getUrlImage())
+                .name(employee.getName())
+                .id(employee.getId())
+                .gender(employee.getGender())
+                .surname(employee.getName())
+                .position(String.valueOf(employee.getPosition()))
+                .urlImage(employee.getUrlImage())
                 .build();
 
     }

@@ -20,6 +20,8 @@ public class UserMapperData  {
                 .phoneNumber(data.getPhoneNumber())
                 .birthday(LocalDateFormatter.format(data.getBirthday()))
                 .gender(data.getGender())
+//                //костыль
+//                .roleId(2)
                 .build();
 
     }

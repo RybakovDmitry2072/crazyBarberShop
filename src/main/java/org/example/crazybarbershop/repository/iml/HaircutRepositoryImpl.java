@@ -1,10 +1,9 @@
 package org.example.crazybarbershop.repository.iml;
 
 import org.example.crazybarbershop.models.Haircut;
-import org.example.crazybarbershop.repository.HaircutRepository;
+import org.example.crazybarbershop.repository.interfaces.HaircutRepository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.util.List;
 
 public class HaircutRepositoryImpl implements HaircutRepository {

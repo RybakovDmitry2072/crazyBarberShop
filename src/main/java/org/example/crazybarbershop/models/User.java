@@ -1,7 +1,6 @@
 package org.example.crazybarbershop.models;
 
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Data
@@ -28,4 +27,13 @@ public class User {
 
     private String gender;
 
+    private Role role;
+
+    public enum Role {
+        ADMIN, USER
+    }
+
 }
+
+
+

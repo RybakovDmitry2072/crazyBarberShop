@@ -14,8 +14,4 @@ public class Category {
 
     private String name;
 
-    private String price;
-
-    private String imageUrl;
-
 }

@@ -1,4 +1,4 @@
-package org.example.crazybarbershop.repository;
+package org.example.crazybarbershop.repository.interfaces;
 
 import org.example.crazybarbershop.models.TimeSlot;
 

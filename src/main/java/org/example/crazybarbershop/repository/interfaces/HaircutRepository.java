@@ -1,8 +1,6 @@
-package org.example.crazybarbershop.repository;
+package org.example.crazybarbershop.repository.interfaces;
 
-import org.example.crazybarbershop.models.Emploee;
 import org.example.crazybarbershop.models.Haircut;
-import org.example.crazybarbershop.models.User;
 
 import java.util.List;
 

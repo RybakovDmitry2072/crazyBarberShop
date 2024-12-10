@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 @Builder
 public class TimeSlot {
 
-    private Long id;            // Уникальный идентификатор слота
+    private long id;
 
-    private Long employeeId;     // Идентификатор сотрудника (связь с Employee)
+    private Employee employee;
 
-    private LocalDateTime startTime; // Время начала
+    private LocalDateTime startTime;
 
-    private LocalDateTime endTime;   // Время окончания
+    private LocalDateTime endTime;
 
-    private boolean isBooked;    // Флаг, забронирован ли слот
+    private boolean isBooked;
 
 }
