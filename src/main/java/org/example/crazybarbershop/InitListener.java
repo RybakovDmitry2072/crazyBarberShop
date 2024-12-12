@@ -4,13 +4,10 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import org.example.crazybarbershop.Exceptions.DbException;
-import org.example.crazybarbershop.repository.iml.EmploeeRepositoryIml;
-import org.example.crazybarbershop.repository.interfaces.EmploeeRepository;
-import org.example.crazybarbershop.repository.interfaces.UserRepository;
-import org.example.crazybarbershop.repository.iml.UserRepositoryIml;
-import org.example.crazybarbershop.services.impl.LoginUserServiceImpl;
-import org.example.crazybarbershop.services.impl.RegistrationUserServiceImpl;
-import org.example.crazybarbershop.services.interfaces.LoginUserService;
+import org.example.crazybarbershop.repository.iml.*;
+import org.example.crazybarbershop.repository.interfaces.*;
+import org.example.crazybarbershop.services.impl.*;
+import org.example.crazybarbershop.services.interfaces.*;
 import org.example.crazybarbershop.util.DataBaseConnectionProvider;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
@@ -35,7 +32,27 @@ public class InitListener implements ServletContextListener {
             sce.getServletContext().setAttribute("registrationUserService", registrationUserService);
 
             EmploeeRepository emploeeRepository = new EmploeeRepositoryIml(dataSource);
-            sce.getServletContext().setAttribute("emploeeRepository", emploeeRepository);
+
+            EmployeeService employeeService = new EmployeeServiceImpl(emploeeRepository);
+            sce.getServletContext().setAttribute("employeeService", employeeService);
+
+            AppointmentRepository appointmentRepository = new AppointmentRepositoryImpl(dataSource);
+
+            AppointmentService appointmentService = new AppointmentServiceImpl(appointmentRepository);
+            sce.getServletContext().setAttribute("appointmentService", appointmentService);
+
+            CategoryRepository categoryRepository = new CategoryRepositoryImpl(dataSource);
+
+            CategoryService categoryService = new CategoryServiceImpl(categoryRepository);
+            sce.getServletContext().setAttribute("categoryService", categoryService);
+
+            TimeSlotRepository timeSlotRepository = new TimeSlotRepositoryImpl(DataBaseConnectionProvider.getInstance().getDataSource());
+
+            TimeSlotService timeSlotService = new TimeSlotServiceImpl(timeSlotRepository);
+            sce.getServletContext().setAttribute("timeSlotService", timeSlotService);
+
+
+
         } catch (DbException e) {
             logger.error("Failed to initialize services: " + e.getMessage(), e);
             throw new RuntimeException("Failed to initialize services", e);

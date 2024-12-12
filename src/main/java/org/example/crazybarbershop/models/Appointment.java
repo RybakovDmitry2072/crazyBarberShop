@@ -14,12 +14,14 @@ public class Appointment {
 
     private int id;
 
-    private User user;
+    private int userId;
 
-    private Category category;
+    private int categoryId;
 
-    private Employee Employee;
+    private int employeeId;
 
-    private TimeSlot timeSlot;
+    private int timeSlotId;
+
+
 
 }

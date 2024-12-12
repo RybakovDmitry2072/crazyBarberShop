@@ -1,9 +1,7 @@
 package org.example.crazybarbershop.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -12,8 +10,9 @@ import java.time.LocalDateTime;
 @Builder
 public class TimeSlot {
 
-    private long id;
+    private int id;
 
+    @ToString.Exclude
     private Employee employee;
 
     private LocalDateTime startTime;

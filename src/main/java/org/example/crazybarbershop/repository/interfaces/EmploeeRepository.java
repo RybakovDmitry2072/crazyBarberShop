@@ -11,7 +11,7 @@ public interface EmploeeRepository {
 //
 //    void save(Employee employee);
 //
-    Optional<Employee> findById(String id);
+    Optional<Employee> findById(int id);
 //
 //    void delete(String id);
 

@@ -12,9 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 public class TimeSlotDto {
 
+    private int id;
+
     private LocalDateTime startTime; // Время начала
-
-    private Long id;
-
 
 }

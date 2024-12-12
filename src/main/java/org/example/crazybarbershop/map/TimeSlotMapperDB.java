@@ -1,7 +1,6 @@
 package org.example.crazybarbershop.map;
 
 import org.example.crazybarbershop.models.TimeSlot;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

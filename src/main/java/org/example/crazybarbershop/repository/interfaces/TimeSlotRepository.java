@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TimeSlotRepository {
 
-    List<TimeSlot> findAvailableSlotsByEmployeeId(int employeeId);
+//    List<TimeSlot> findAvailableSlotsByEmployeeId(int employeeId);
 
-    void update(TimeSlot timeSlot);
+    void updateCategoryFlag(int timeSlotId, boolean newFlag);
 }

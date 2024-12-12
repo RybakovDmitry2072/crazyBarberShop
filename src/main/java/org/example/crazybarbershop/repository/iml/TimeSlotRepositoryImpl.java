@@ -1,23 +1,23 @@
-//package org.example.crazybarbershop.repository.iml;
-//
-//import org.example.crazybarbershop.models.TimeSlot;
-//import org.example.crazybarbershop.repository.interfaces.TimeSlotRepository;
-//
-//import javax.sql.DataSource;
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class TimeSlotRepositoryImpl implements TimeSlotRepository {
-//    private static final String QUERY = "SELECT * FROM time_slot WHERE employee_id = ? AND is_booked = FALSE";
-//    private DataSource dataSource;
-//
-//    public TimeSlotRepositoryImpl(DataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
+package org.example.crazybarbershop.repository.iml;
+
+import org.example.crazybarbershop.models.TimeSlot;
+import org.example.crazybarbershop.repository.interfaces.TimeSlotRepository;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TimeSlotRepositoryImpl implements TimeSlotRepository {
+    private static final String QUERY_NEW_FLAG = "UPDATE time_slots SET is_booked = ? WHERE id = ?";
+    private DataSource dataSource;
+
+    public TimeSlotRepositoryImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
 //
 //    @Override
 //    public List<TimeSlot> findAvailableSlotsByEmployeeId(int employeeId) {
@@ -43,8 +43,19 @@
 //        return slots;
 //    }
 //
-//    @Override
-//    public void update(TimeSlot timeSlot) {
-//
-//    }
-//}
+
+    @Override
+    public void updateCategoryFlag(int timeSlotId, boolean newFlag) {
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(QUERY_NEW_FLAG)) {
+
+            stmt.setBoolean(1, newFlag);
+            stmt.setInt(2, timeSlotId);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

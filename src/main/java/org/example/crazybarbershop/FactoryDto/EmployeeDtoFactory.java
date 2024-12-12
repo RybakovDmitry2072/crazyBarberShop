@@ -1,15 +1,15 @@
 package org.example.crazybarbershop.FactoryDto;
 
-import org.example.crazybarbershop.dto.EmploeeDto;
+import org.example.crazybarbershop.dto.EmployeeDto;
 import org.example.crazybarbershop.models.Employee;
 
 public class EmployeeDtoFactory {
 
-    public static EmploeeDto factoryDto(Employee employee){
+    public static EmployeeDto factoryDto(Employee employee){
 
-        return EmploeeDto.builder()
-                .name(employee.getName())
+        return EmployeeDto.builder()
                 .id(employee.getId())
+                .name(employee.getName())
                 .gender(employee.getGender())
                 .surname(employee.getName())
                 .position(String.valueOf(employee.getPosition()))

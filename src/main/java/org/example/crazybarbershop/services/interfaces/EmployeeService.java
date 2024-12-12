@@ -1,6 +1,6 @@
 package org.example.crazybarbershop.services.interfaces;
 
-import org.example.crazybarbershop.dto.EmploeeDto;
+import org.example.crazybarbershop.dto.EmployeeDto;
 import org.example.crazybarbershop.dto.TimeSlotDto;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.Map;
 
 public interface EmployeeService {
 
-    List<EmploeeDto> getAllEmployees();
+    List<EmployeeDto> getAllEmployees();
 
-    List<TimeSlotDto> getFreeTimeSlot(int EmployeeId);
+//    List<TimeSlotDto> getFreeTimeSlot(Employee employee);
 
-    Map<EmploeeDto, List<TimeSlotDto>> getFreeTimeForAllEmployee();
+    Map<EmployeeDto, List<TimeSlotDto>> getFreeTimeForAllEmployee();
 }

@@ -2,7 +2,6 @@ package org.example.crazybarbershop.map;
 
 
 import org.example.crazybarbershop.models.Employee;
-import org.example.crazybarbershop.models.Position;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

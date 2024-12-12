@@ -3,12 +3,13 @@ package org.example.crazybarbershop.repository.interfaces;
 import org.example.crazybarbershop.models.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoryRepository {
 
-    List<Category> finfAll();
+    Optional<List<Category>> finfAll();
 
-    Category findById(int id);
+    Optional<Category> findById(int id);
 
     void save(Category category);
 

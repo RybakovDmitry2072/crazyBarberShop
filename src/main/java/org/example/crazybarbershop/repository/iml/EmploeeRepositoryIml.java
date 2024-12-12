@@ -11,10 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class EmploeeRepositoryIml implements EmploeeRepository {
 
@@ -28,13 +25,17 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
 //    private static final String QUERY_FIND_BY_ID = "SELECT * FROM emploee WHERE id = ?";
 //    private static final String QUERY_FIND_ALL = "SELECT * FROM emploee";
 
-    private static final String QUERY_FIND_BY_ID = "SELECT e.*, p.name as positions_name " +
-            "from employees e " +
-            "join positions p on e.position_id = p.id " +
-            "where e.id = ?";
+    private static final String QUERY_FIND_BY_ID = "SELECT e.*, p.name AS position_name, ts.id AS time_slot_id, ts.start_time, ts.end_time, ts.is_booked\n" +
+            "FROM employees e\n" +
+            "         JOIN positions p ON e.position_id = p.id\n" +
+            "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
+            "WHERE e.id = ?;";
 
-    private static final String QUERY_FIND_ALL = "SELECT e.*, p.name as positions_name from employees e " +
-            "join positions p on e.position_id = p.id";
+    private static final String QUERY_FIND_ALL_WITH_AVAILABLE_TIME_SLOTS = "SELECT e.*, p.name AS position_name, ts.id AS time_slot_id, ts.start_time, ts.end_time, ts.is_booked\n" +
+            "FROM employees e\n" +
+            "         JOIN positions p ON e.position_id = p.id\n" +
+            "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
+            "where ts.is_booked = FALSE";
 
     private DataSource dataSource;
 
@@ -76,52 +77,95 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
 //        }
 //    }
 
-    @Override
-    public Optional<List<Employee>> findAll() {
-        List<Employee> employeeList = new ArrayList<>();
+//    @Override
+//    public Optional<List<Employee>> findAll() {
+//        List<Employee> employeeList = new ArrayList<>();
+//
+//        try (Connection conn = dataSource.getConnection();
+//             PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL);
+//             ResultSet rs = stmt.executeQuery()) {
+//
+//            while (rs.next()) {
+////                Employee employee = new Employee();
+////                employee.setId(rs.getInt("id"));
+////                employee.setName(rs.getString("name"));
+////                employee.setSurname(rs.getString("surname"));
+////                employee.setPhoneNumber(rs.getString("phone_number"));
+////                employee.setPosition(Employee.Position.valueOf(rs.getString("position_name")));
+////                employee.setEmail(rs.getString("email"));
+////                employee.setAddress(rs.getString("address"));
+////                employee.setBirthday(rs.getObject("birthday", LocalDate.class));
+////                employee.setGender(rs.getString("gender"));
+////                employee.setUrlImage(rs.getString("url_image"));
+//                Employee employee = EmployeeMapperDB.mapRow(rs);
+//
+////                List<TimeSlot> timeSlotList = List.of(TimeSlotMapperDB.mapRow(rs));
+////                while (rs.next()){
+////                    timeSlotList.add(TimeSlotMapperDB.mapRow(rs));
+////                }
+////                employee.setTimeSlotList(timeSlotList);
+//                employeeList.add(employee);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return Optional.ofNullable(employeeList);
+//    }
 
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL);
-             ResultSet rs = stmt.executeQuery()) {
 
-            while (rs.next()) {
-                Employee employee = new Employee();
-                employee.setId(rs.getInt("id"));
-                employee.setName(rs.getString("name"));
-                employee.setSurname(rs.getString("surname"));
-                employee.setPhoneNumber(rs.getString("phone_number"));
-                employee.setPosition(Employee.Position.valueOf(rs.getString("positions_name")));
-                employee.setEmail(rs.getString("email"));
-                employee.setAddress(rs.getString("address"));
-                employee.setBirthday(rs.getObject("birthday", LocalDate.class));
-                employee.setGender(rs.getString("gender"));
-                employee.setUrlImage(rs.getString("url_image"));
-                employeeList.add(employee);
+//TODO : Костыль?? код с душком
+@Override
+public Optional<List<Employee>> findAll() {
+    Map<Integer, Employee> employeeMap = new HashMap<>();
+
+    try (Connection conn = dataSource.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_WITH_AVAILABLE_TIME_SLOTS);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            int employeeId = rs.getInt("id");
+            Employee employee = employeeMap.get(employeeId);
+            if (employee == null) {
+                employee = EmployeeMapperDB.mapRow(rs);
+                employee.setTimeSlotList(new ArrayList<>()); // Инициализируем список TimeSlot
+                employeeMap.put(employeeId, employee);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            TimeSlot timeSlot = TimeSlotMapperDB.mapRow(rs);
+            timeSlot.setEmployee(employee);
+            employee.addTimeSlot(timeSlot);
         }
-        return Optional.ofNullable(employeeList);
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
 
+    return Optional.ofNullable(new ArrayList<>(employeeMap.values()));
+
+}
+
+
+
     @Override
-    public Optional<Employee> findById(String id) {
-        Employee employee = null;
+    public Optional<Employee> findById(int id) {
+        Employee employee = null; // Инициализация переменной employee
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_BY_ID)) {
 
-            stmt.setString(1, id);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 employee = EmployeeMapperDB.mapRow(rs);
 
-                //TODO : этого ли класса ответственность за создания timeSlot??? + маленькое сцепление !!!
-                List<TimeSlot> timeSlotList = List.of(TimeSlotMapperDB.mapRow(rs));
-                while (rs.next()){
+                List<TimeSlot> timeSlotList = new ArrayList<>();
+                do {
                     timeSlotList.add(TimeSlotMapperDB.mapRow(rs));
-                }
+                } while (rs.next());
+
+                final Employee finalEmployee = employee;
+                timeSlotList.forEach(timeSlot -> timeSlot.setEmployee(finalEmployee));
+
+                employee.setTimeSlotList(timeSlotList);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -129,4 +173,5 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
 
         return Optional.ofNullable(employee);
     }
+
 }

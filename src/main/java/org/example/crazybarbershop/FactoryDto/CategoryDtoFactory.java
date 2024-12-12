@@ -5,12 +5,12 @@ import org.example.crazybarbershop.models.Category;
 
 public class CategoryDtoFactory {
 
-    public static CategoryDto factory(Category category){
-
+    public static CategoryDto factoryDto(Category category){
         return CategoryDto.builder()
                 .id(category.getId())
                 .name(category.getName())
+                .price(category.getPrice())
                 .build();
-
     }
+
 }

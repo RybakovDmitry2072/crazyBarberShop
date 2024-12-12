@@ -16,8 +16,6 @@ public class CategoryDto {
 
     private String name;
 
-    private String price;
-
-    private String imageUrl;
+    private int price;
 
 }

@@ -13,7 +13,6 @@
 <div class="container">
     <h2>Форма регистрации</h2>
     <form action="${pageContext.request.contextPath}/registration" method="post" accept-charset="UTF-8">
-        <!-- Поля формы -->
 
         <div class="form-group">
             <label for="name">Имя:</label>
@@ -50,7 +49,6 @@
             <input type="date" id="dob" name="dob" required>
         </div>
 
-        <!-- Пол для выбора пола -->
         <div class="radio-group">
             <label>Пол:</label>
             <label><input type="radio" name="gender" value="Мужской" required> Мужской</label>
