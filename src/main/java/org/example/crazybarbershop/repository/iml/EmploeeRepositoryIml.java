@@ -31,11 +31,11 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
             "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
             "WHERE e.id = ?;";
 
-    private static final String QUERY_FIND_ALL_WITH_AVAILABLE_TIME_SLOTS = "SELECT e.*, p.name AS position_name, ts.id AS time_slot_id, ts.start_time, ts.end_time, ts.is_booked\n" +
+    private static final String QUERY_FIND_ALL_BARBER_WITH_AVAILABLE_TIME_SLOTS = "SELECT e.*, p.name AS position_name, ts.id AS time_slot_id, ts.start_time, ts.end_time, ts.is_booked\n" +
             "FROM employees e\n" +
             "         JOIN positions p ON e.position_id = p.id\n" +
             "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
-            "where ts.is_booked = FALSE";
+            "where ts.is_booked = FALSE and p.name = 'BARBER'";
 
     private DataSource dataSource;
 
@@ -119,7 +119,7 @@ public Optional<List<Employee>> findAll() {
     Map<Integer, Employee> employeeMap = new HashMap<>();
 
     try (Connection conn = dataSource.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_WITH_AVAILABLE_TIME_SLOTS);
+         PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_BARBER_WITH_AVAILABLE_TIME_SLOTS);
          ResultSet rs = stmt.executeQuery()) {
 
         while (rs.next()) {

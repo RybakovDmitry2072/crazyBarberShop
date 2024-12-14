@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="ru">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <header class="main-header">
     <div class="container clearfix">
         <nav class="main-navigation">
@@ -13,8 +13,19 @@
                 <li><a href="${pageContext.request.contextPath}/appointment">Записаться</a></li>
             </ul>
         </nav>
+
         <div class="user-block">
-            <a class="user-login" href="${pageContext.request.contextPath}/login">Вход</a>
+            <c:if test="${empty sessionScope.user}">
+                <a class="user-login" href="${pageContext.request.contextPath}/login">Вход</a>
+            </c:if>
+            <c:if test="${not empty sessionScope.user}">
+                <a class="user-login" href="${pageContext.request.contextPath}/logout">Выход</a>
+                <a class="user-profil" href="${pageContext.request.contextPath}/profile">Профиль</a>
+
+            </c:if>
         </div>
     </div>
 </header>
+
+
+

@@ -1,19 +1,22 @@
-bodyINDEX {
-    font-family: Arial, sans-serif;
+body {
+    font-family: "PT Sans Narrow", "Arial", sans-serif;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    background: #000000 url("https://i.imgur.com/UhuqbXb.jpg") no-repeat center top;
+
 }
 
 .container {
-    background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
+    color: white;
+
 }
 
 h2 {
@@ -32,6 +35,29 @@ label {
     font-weight: bold;
 }
 
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-register {
+    background-color: rgba(0, 0, 0, 0.1); /* Green */
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /*margin: 4px 2px;*/
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+.btn-register:hover {
+    background-color: #0056b3;
+}
+
 input[type="text"],
 input[type="password"] {
     width: 100%;
@@ -44,7 +70,7 @@ input[type="password"] {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #303742;
     color: #fff;
     border: none;
     border-radius: 4px;

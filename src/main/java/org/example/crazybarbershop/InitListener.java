@@ -25,11 +25,8 @@ public class InitListener implements ServletContextListener {
 
             UserRepository userRepository = new UserRepositoryIml(dataSource);
 
-            LoginUserService loginUserService = new LoginUserServiceImpl(userRepository);
-            sce.getServletContext().setAttribute("loginUserService", loginUserService);
-
-            RegistrationUserServiceImpl registrationUserService = new RegistrationUserServiceImpl(userRepository);
-            sce.getServletContext().setAttribute("registrationUserService", registrationUserService);
+            UserService userService = new UserServiceImpl(userRepository);
+            sce.getServletContext().setAttribute("userService", userService);
 
             EmploeeRepository emploeeRepository = new EmploeeRepositoryIml(dataSource);
 

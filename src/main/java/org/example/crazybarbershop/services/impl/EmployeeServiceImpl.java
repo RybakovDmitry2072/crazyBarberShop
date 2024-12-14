@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmploeeRepository employeeRepository;
 
     @Override
-    public List<EmployeeDto> getAllEmployees() {
+    public List<EmployeeDto> getAllBarberEmployees() {
         Optional<List<Employee>> employeeList = employeeRepository.findAll();
         try {
             return employeeList.get().stream()

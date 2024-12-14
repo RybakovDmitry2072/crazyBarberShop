@@ -9,6 +9,7 @@
 
 
 <t:mainLayuot title="Запись" cssPath="styleAppointmentCSS">
+
     <div class="container">
         <h2>Запись на прием</h2>
 
@@ -33,6 +34,7 @@
                                 <option value="${category.id}">${category.name}</option>
                             </c:forEach>
                         </select>
+
 
                             <%-- Время --%>
                         <input type="hidden" name="employeeId" value="${emploeeDto.id}">

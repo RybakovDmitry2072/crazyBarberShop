@@ -18,7 +18,7 @@
 
 .form-container button {
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #0056b3;
     color: white;
     border: none;
     border-radius: 5px;
@@ -35,6 +35,8 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
+    background: #000000 url("https://i.imgur.com/UhuqbXb.jpg") no-repeat center top;
+
 }
 
 /* Основной контейнер */
@@ -42,7 +44,6 @@ body {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-    background: white;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -50,7 +51,7 @@ body {
 /* Заголовок */
 h2 {
     text-align: center;
-    color: #333;
+    color: white;
 }
 
 /* Список сотрудников */

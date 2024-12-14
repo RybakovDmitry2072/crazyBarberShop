@@ -73,5 +73,7 @@ public class AppointmentServlet extends HttpServlet {
         appointmentService.bookAppointment(haircutType, employeeId, timeSlotId);
 
         timeSlotService.updateCategoryFlag(timeSlotId, true);
+
+        req.getRequestDispatcher(JSPHelper.getPath("index")).forward(req, resp);
     }
 }

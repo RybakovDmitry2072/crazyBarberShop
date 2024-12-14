@@ -26,18 +26,14 @@
     </section> <!---features--->
     <div class="index-content clearfix">
         <div class="index-content-left">
-            <h2 class="index-content-title"> Новости </h2>
-            <ul class="news-preview">
-                <li>
-                    <p>Нам наконец завезли ягермастер! Теперь вы можете пропустить стаканчик во время стрижки </p>
-                    <time datetime="2016-01-11"> 11 января</time>
-                </li>
-                <li>
-                    <p> В нашей команде пополнение, Борис "Бритва" Стригунец, обладатель множества титулов и наград пополнил наши стройные ряды</p>
-                    <time datetime="2016-01-19"> 19 января</time>
-                </li>
-            </ul>
-            <a class="btn" href="#"> Все новости </a>
+            <h2 class="index-content-title">Портфолио</h2>
+            <div class="gallery">
+                <figure class="gallery-content">
+                    <img src="https://i.imgur.com/QBY4tac.jpg" width="286" height="164" alt="фото">
+                </figure>
+                <button class="btn gallery-prev" disabled>Назад</button>
+                <button class="btn gallery-next">Вперед</button>
+            </div> <!---gallery--->
         </div> <!---index-content-left--->
         <div class="index-content-right">
             <h2 class="index-content-title">Фотогалерея</h2>
@@ -63,7 +59,6 @@
                 СБ-ВС: с 10:00 до 19:00
             </p>
             <a class="btn" href="#">Как проехать</a>
-            <a class="btn" href="#">Обратная связь</a>
         </div> <!---index-content-left--->
         <div class="index-content-right">
             <h2 class="index-content-title"> Записаться </h2>

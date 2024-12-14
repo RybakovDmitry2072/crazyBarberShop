@@ -13,13 +13,13 @@ public class LocalDateFormatter {
     private static final String PATTERN = "yyyy-MM-dd";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
 
-    public LocalDate format(String date){
+    public static LocalDate format(String date){
 
         return LocalDate.parse(date, FORMATTER);
 
     }
 
-    public boolean isValid(String date){
+    public static boolean isValid(String date){
         try {
             return Optional.ofNullable(date)
                     .map(LocalDateFormatter::format)

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface EmployeeService {
 
-    List<EmployeeDto> getAllEmployees();
+    List<EmployeeDto> getAllBarberEmployees();
 
 //    List<TimeSlotDto> getFreeTimeSlot(Employee employee);
 

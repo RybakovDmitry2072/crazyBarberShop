@@ -11,8 +11,7 @@
     <title>${title}</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/${cssPath}.css">
 </head>
-<body>
-<jsp:doBody />
-
-</body>
+    <body>
+        <jsp:doBody />
+    </body>
 </html>

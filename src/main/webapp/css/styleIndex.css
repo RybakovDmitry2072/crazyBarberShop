@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     min-width: 960px;
     font-weight: 700;
@@ -9,16 +15,25 @@ body {
     color: #ffffff;
 }
 
+.container-logo {
+    display: flex;
+    align-items: center;
+}
+
 .container {
     width: 940px;
     margin: 0 auto;
     padding: 10px;
+
 }
 
 .main-header {
     margin-bottom: 60px;
     background-color: #000000;
+    width: 100%;
     color: #ffffff;
+    top: 0px;
+
 }
 
 .main-navigation {
@@ -51,8 +66,12 @@ body {
     line-height: 20px;
 }
 
+
+
 .user-block {
+    display: flex;
     max-width: 140px;
+    align-items: center; /* Выравнивание по вертикали */
     float: right;
 }
 
@@ -68,6 +87,28 @@ body {
     line-height: 20px;
     color: #ffffff;
     text-decoration: none;
+}
+.user-profil {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+
+    padding: 25px 20px;
+
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+.user-profil:hover {
+    background: #242424;
+
+}
+
+.user-profil:hover::before {
+    opacity: 1;
 }
 
 .user-login:hover {

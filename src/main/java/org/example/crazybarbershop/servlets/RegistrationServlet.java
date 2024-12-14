@@ -6,9 +6,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.example.crazybarbershop.Exceptions.ValidatiounException;
 import org.example.crazybarbershop.data.UserRegistrationData;
-import org.example.crazybarbershop.services.interfaces.RegistrationUserService;
+import org.example.crazybarbershop.models.User;
+import org.example.crazybarbershop.services.impl.UserServiceImpl;
+import org.example.crazybarbershop.services.interfaces.UserService;
 import org.example.crazybarbershop.util.JSPHelper;
 
 import java.io.IOException;
@@ -16,12 +19,12 @@ import java.io.IOException;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
-    private RegistrationUserService registrationUserService;
+    private UserService userService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        registrationUserService = (RegistrationUserService) getServletContext().getAttribute("registrationUserService");
+        userService = (UserServiceImpl) getServletContext().getAttribute("userService");
     }
 
     @Override
@@ -44,8 +47,12 @@ public class RegistrationServlet extends HttpServlet {
                 .build();
 
         try {
-            registrationUserService.registerUser(userRegistrationData);
+            User user =userService.registerUser(userRegistrationData);
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
+
+            HttpSession httpSession = req.getSession();
+            httpSession.setAttribute("user", user);
+
         } catch (ValidatiounException e) {
             req.setAttribute("errors", e.getErrors() );
             doGet(req, resp);

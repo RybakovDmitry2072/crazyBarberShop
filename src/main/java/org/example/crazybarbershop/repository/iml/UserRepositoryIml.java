@@ -20,7 +20,7 @@ public class UserRepositoryIml implements UserRepository {
 
     private static final String QUERY_BY_LOGIN = "select *, r.role_name as role_name from users u " +
             "join roles r on u.role_id = r.id " +
-            "where u.email = \'yroboros2020@mail.ru\'";
+            "where u.login = ?";
 
 //    private static final String QUERY_BY_EMAIL = "SELECT * FROM \"user\" WHERE email = ?";
 
