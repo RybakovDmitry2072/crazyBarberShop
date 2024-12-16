@@ -15,16 +15,6 @@ import java.util.*;
 
 public class EmploeeRepositoryIml implements EmploeeRepository {
 
-//    private static final String QUERY_DELETE = "DELETE FROM emploee WHERE id = ?";
-//    private static final String QUERY_SAVE = "INSERT INTO emploee (name, surname, phone_number, position, email, address, birthday, gender, photo_url) " +
-//            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) " +
-//            "ON CONFLICT (id) DO UPDATE SET " +
-//            "name = EXCLUDED.name, surname = EXCLUDED.surname, phone_number = EXCLUDED.phone_number, " +
-//            "position = EXCLUDED.position, email = EXCLUDED.email, address = EXCLUDED.address, " +
-//            "birthday = EXCLUDED.birthday, gender = EXCLUDED.gender, photo_url = EXCLUDED.photo_url";
-//    private static final String QUERY_FIND_BY_ID = "SELECT * FROM emploee WHERE id = ?";
-//    private static final String QUERY_FIND_ALL = "SELECT * FROM emploee";
-
     private static final String QUERY_FIND_BY_ID = "SELECT e.*, p.name AS position_name, ts.id AS time_slot_id, ts.start_time, ts.end_time, ts.is_booked\n" +
             "FROM employees e\n" +
             "         JOIN positions p ON e.position_id = p.id\n" +
@@ -43,77 +33,6 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
         this.dataSource = dataSource;
     }
 
-//    @Override
-//    public void delete(String id) {
-//        String query = QUERY_DELETE;
-//        try (Connection conn = dataSource.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//            stmt.setString(1, id);
-//            stmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void save(Employee employee) {
-//        String query = QUERY_SAVE;
-//
-//        try (Connection conn = dataSource.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//            stmt.setString(1, employee.getName());
-//            stmt.setString(2, employee.getSurname());
-//            stmt.setString(3, employee.getPhoneNumber());
-//            stmt.setInt(4, employee.getPosition().getId());
-//            stmt.setString(5, employee.getEmail());
-//            stmt.setString(6, employee.getAddress());
-//            stmt.setObject(7, employee.getBirthday());
-//            stmt.setString(8, employee.getGender());
-//            stmt.setString(9, employee.getUrlImage()); // Добавляем URL фото
-//
-//            stmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    @Override
-//    public Optional<List<Employee>> findAll() {
-//        List<Employee> employeeList = new ArrayList<>();
-//
-//        try (Connection conn = dataSource.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL);
-//             ResultSet rs = stmt.executeQuery()) {
-//
-//            while (rs.next()) {
-////                Employee employee = new Employee();
-////                employee.setId(rs.getInt("id"));
-////                employee.setName(rs.getString("name"));
-////                employee.setSurname(rs.getString("surname"));
-////                employee.setPhoneNumber(rs.getString("phone_number"));
-////                employee.setPosition(Employee.Position.valueOf(rs.getString("position_name")));
-////                employee.setEmail(rs.getString("email"));
-////                employee.setAddress(rs.getString("address"));
-////                employee.setBirthday(rs.getObject("birthday", LocalDate.class));
-////                employee.setGender(rs.getString("gender"));
-////                employee.setUrlImage(rs.getString("url_image"));
-//                Employee employee = EmployeeMapperDB.mapRow(rs);
-//
-////                List<TimeSlot> timeSlotList = List.of(TimeSlotMapperDB.mapRow(rs));
-////                while (rs.next()){
-////                    timeSlotList.add(TimeSlotMapperDB.mapRow(rs));
-////                }
-////                employee.setTimeSlotList(timeSlotList);
-//                employeeList.add(employee);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return Optional.ofNullable(employeeList);
-//    }
-
-
-//TODO : Костыль?? код с душком
 @Override
 public Optional<List<Employee>> findAll() {
     Map<Integer, Employee> employeeMap = new HashMap<>();
@@ -131,7 +50,7 @@ public Optional<List<Employee>> findAll() {
                 employeeMap.put(employeeId, employee);
             }
             TimeSlot timeSlot = TimeSlotMapperDB.mapRow(rs);
-            timeSlot.setEmployee(employee);
+            timeSlot.setEmployeeId(employeeId);
             employee.addTimeSlot(timeSlot);
         }
     } catch (SQLException e) {
@@ -162,8 +81,8 @@ public Optional<List<Employee>> findAll() {
                     timeSlotList.add(TimeSlotMapperDB.mapRow(rs));
                 } while (rs.next());
 
-                final Employee finalEmployee = employee;
-                timeSlotList.forEach(timeSlot -> timeSlot.setEmployee(finalEmployee));
+                final int finalEmployee = employee.getId();
+                timeSlotList.forEach(timeSlot -> timeSlot.setEmployeeId(finalEmployee));
 
                 employee.setTimeSlotList(timeSlotList);
             }

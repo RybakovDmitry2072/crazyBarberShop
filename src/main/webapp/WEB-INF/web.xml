@@ -5,7 +5,10 @@
          version="5.0">
 
 
-
+    <error-page>
+        <error-code>401</error-code>
+        <location>/WEB-INF/view/exception/unauthorized.jsp</location>
+    </error-page>
 </web-app>
 
 

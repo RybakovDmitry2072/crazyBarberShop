@@ -10,7 +10,7 @@ public interface EmployeeService {
 
     List<EmployeeDto> getAllBarberEmployees();
 
-//    List<TimeSlotDto> getFreeTimeSlot(Employee employee);
+    EmployeeDto getEmployeeByid(int employeeId);
 
     Map<EmployeeDto, List<TimeSlotDto>> getFreeTimeForAllEmployee();
 }

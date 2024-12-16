@@ -3,6 +3,7 @@ package org.example.crazybarbershop.services.impl;
 import lombok.AllArgsConstructor;
 import org.example.crazybarbershop.Exceptions.ValidatiounException;
 import org.example.crazybarbershop.data.UserRegistrationData;
+import org.example.crazybarbershop.dto.UserDto;
 import org.example.crazybarbershop.map.UserMapperData;
 import org.example.crazybarbershop.models.User;
 import org.example.crazybarbershop.repository.interfaces.UserRepository;
@@ -51,5 +52,8 @@ public class UserServiceImpl implements UserService {
 
     }
 
-
+    @Override
+    public UserDto getUserById(int userId) {
+        return null;
+    }
 }

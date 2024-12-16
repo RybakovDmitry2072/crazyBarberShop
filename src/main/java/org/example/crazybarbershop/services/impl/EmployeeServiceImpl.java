@@ -32,16 +32,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-    //TODO : нужен ли этот метод???
-//    @Override
-//    public List<TimeSlotDto> getFreeTimeSlot(Employee employee) {
-//        List<TimeSlot> timeSlotList = timeSlotRepository.findAvailableSlotsByEmployeeId(employeeId);
-//        List<TimeSlotDto> timeSlotDtoList;
-//        return timeSlotList.stream()
-//                .map(TimeSlotDtoFactory::factoryDto)
-//                .collect(Collectors.toList());
-//        return null;
-//    }
+    @Override
+    public EmployeeDto getEmployeeByid(int employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() ->
+                new IllegalStateException("not found employee by id"));
+
+        EmployeeDto employeeDto = EmployeeDtoFactory.factoryDto(employee);
+
+        return employeeDto;
+    }
+
 
     @Override
     public Map<EmployeeDto, List<TimeSlotDto>> getFreeTimeForAllEmployee() {

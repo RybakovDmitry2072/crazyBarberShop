@@ -12,8 +12,7 @@ public class TimeSlot {
 
     private int id;
 
-    @ToString.Exclude
-    private Employee employee;
+    private int employeeId;
 
     private LocalDateTime startTime;
 

@@ -9,6 +9,7 @@
 
 
 <t:mainLayuot title="Запись" cssPath="styleAppointmentCSS">
+    <%@include file="/WEB-INF/view/parts/_header.jsp"%>
 
     <div class="container">
         <h2>Запись на прием</h2>
@@ -55,6 +56,8 @@
     </div>
 
 </t:mainLayuot>
+<%@include file="/WEB-INF/view/parts/_footer.jsp"%>
+
 </html>
 
 
