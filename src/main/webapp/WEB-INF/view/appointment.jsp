@@ -28,7 +28,7 @@
                             <%-- Категория --%>
                             <%--@declare id="category"--%>
                                     <%--@declare id="timeslot"--%>
-                        <label for="category">Выберите категорию:</label>
+                        <%--@declare id="guestname"--%><%--@declare id="guestemail"--%><label for="category">Выберите категорию:</label>
                         <select name="category" required>
                             <option value="">-- Выберите категорию --</option>
                             <c:forEach var="category" items="${categories}">
@@ -36,8 +36,6 @@
                             </c:forEach>
                         </select>
 
-
-                            <%-- Время --%>
                         <input type="hidden" name="employeeId" value="${emploeeDto.id}">
                         <label for="timeSlot">Выберите время:</label>
                         <select name="timeSlot" required>
@@ -47,6 +45,9 @@
                             </c:forEach>
                         </select>
 
+                                <c:if test="${not empty sessionScope.user}">
+                                    <input type="hidden" name="userId" value="${sessionScope.user.id}">
+                                </c:if>
                             <%-- Кнопка отправки --%>
                         <button type="submit" class="book-button">Записаться</button>
                     </form>
@@ -59,9 +60,3 @@
 <%@include file="/WEB-INF/view/parts/_footer.jsp"%>
 
 </html>
-
-
-
-
-
-

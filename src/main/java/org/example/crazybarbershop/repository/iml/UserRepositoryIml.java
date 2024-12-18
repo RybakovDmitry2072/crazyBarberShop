@@ -41,7 +41,7 @@ public class UserRepositoryIml implements UserRepository {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw  new DbException("Failed to save user:" + e.getMessage(), e);
+            throw new DbException("Failed to save user:" + e.getMessage(), e);
         }
     }
 

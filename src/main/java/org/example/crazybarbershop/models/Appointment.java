@@ -22,6 +22,8 @@ public class Appointment {
 
     private int timeSlotId;
 
+    private int guestId;
+
     private String status;
 
 }

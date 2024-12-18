@@ -6,7 +6,17 @@
 
 <%@include file="/WEB-INF/view/parts/_header.jsp"%>
 
-<main class="container">
+<%--    <div id="confirmationModal" class="modal">--%>
+<%--        <div class="modal-content">--%>
+<%--            <span class="close-button">&times;</span>--%>
+<%--            <p>Ваш заказ подтвержден!</p>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <script src="script.js"></script>--%>
+
+
+
+    <main class="container">
     <div class="index-logo">
         <img src="https://i.imgur.com/RsD2o6O.png" height="204px" width="370px"; alt="Барбершоп Бородинский">
     </div>
@@ -24,21 +34,17 @@
             <p>Наши мастера - профессионалы своего дела и не могут стоить дешево. К тому же, разве цена не даёт определенный статус? </p>
         </div> <!---features-item--->
     </section> <!---features--->
-
     <div class="index-content clearfix">
         <div class="index-content-left">
             <h2 class="index-content-title">Портфолио</h2>
             <div class="gallery">
                 <figure class="gallery-content">
                     <img src="https://i.imgur.com/QBY4tac.jpg" width="286" height="164" alt="фото">
-                    <img src="https://i.imgur.com/QBY4tac.jpg" width="286" height="164" alt="фото">
-
                 </figure>
                 <button class="btn gallery-prev" disabled>Назад</button>
                 <button class="btn gallery-next">Вперед</button>
             </div> <!---gallery--->
         </div> <!---index-content-left--->
-
         <div class="index-content-right">
             <h2 class="index-content-title">Фотогалерея</h2>
             <div class="gallery">
@@ -77,7 +83,6 @@
         </div>  <!---index-content-right--->
     </div> <!---index-content--->
 </main>
-
 </t:mainLayuot></t>
 
 <%@include file="/WEB-INF/view/parts/_footer.jsp"%>

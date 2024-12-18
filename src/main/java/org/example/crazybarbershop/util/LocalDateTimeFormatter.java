@@ -1,40 +1,33 @@
 package org.example.crazybarbershop.util;
 
-import java.time.LocalDate;
+import lombok.experimental.UtilityClass;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
-//TODO : доделать
+@UtilityClass
 public class LocalDateTimeFormatter {
-    private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
+
+    private static final String PATTERN = "dd.MM.yyyy HH:mm";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
 
-    public static LocalDateTime format(String date) {
-        return LocalDateTime.parse(date, FORMATTER);
-    }
-    public static String extractDateTimeWithoutSeconds(String dateTimeString) {
-        try {
-            // Парсим строку в LocalDateTime
-            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
-            // Форматируем LocalDateTime в строку, содержащую только дату и время без секунд
-            return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        } catch (DateTimeParseException e) {
-            // Обработка ошибки парсинга
-            e.printStackTrace();
-            return null;
-        }
+    public static LocalDateTime format(String dateTime) {
+        return LocalDateTime.parse(dateTime, FORMATTER);
     }
 
-    public static boolean isValid(String date) {
+    public static boolean isValid(String dateTime) {
         try {
-            return Optional.ofNullable(date)
+            return Optional.ofNullable(dateTime)
                     .map(LocalDateTimeFormatter::format)
                     .isPresent();
         } catch (DateTimeParseException e) {
             return false;
         }
     }
-}
 
+    public static String formatToString(LocalDateTime dateTime) {
+        return dateTime.format(FORMATTER);
+    }
+}

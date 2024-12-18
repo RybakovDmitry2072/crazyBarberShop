@@ -7,13 +7,13 @@ import java.time.LocalDateTime;
 
 public class AppointmentDtoFactory {
 
-    public static AppointmentDto factoryDto(int id, String username, String categoriaName, String employeeName, LocalDateTime timeSlot, String status) {
+    public static AppointmentDto factoryDto(int id, String username, String categoriaName, String employeeName, String timeSlot, String status) {
         return AppointmentDto.builder()
                 .id(id)
                 .username(username)
                 .categoryName(categoriaName)
                 .employeeName(employeeName)
-                .timeSlot(timeSlot)
+                .timeSlot(timeSlot.toString())
                 .status(status)
                 .build();
     }

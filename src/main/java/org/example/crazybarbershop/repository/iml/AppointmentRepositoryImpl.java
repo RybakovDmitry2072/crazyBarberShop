@@ -14,11 +14,13 @@ import java.util.Optional;
 
 public class AppointmentRepositoryImpl implements AppointmentRepository {
 
-    private static final String QUERY_SAVE = "INSERT INTO appointments(category_id, employee_id, time_slot_id) values(?, ?, ?)";
+    private static final String QUERY_SAVE = "INSERT INTO appointments(category_id, employee_id, time_slot_id, user_id) values(?, ?, ?, ?)";
 
     private static final String QUERY_FIND_APPOINTMENTS_BY_USER_ID = "SELECT id, user_id, category_id, employee_id, time_slot_id, status FROM appointments WHERE user_id = ?";
 
     private static final String QUERY_FIND_BY_ID = "SELECT * FROM appointments WHERE id = ?";
+
+    private static final String QUERY_DELETE = "DELETE FROM appointments WHERE id = ?";
 
     private DataSource dataSource;
 
@@ -48,8 +50,16 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(int id) {
+        try (Connection conn = dataSource.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(QUERY_DELETE)) {
 
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -60,6 +70,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
             stmt.setInt(1, appointment.getCategoryId());
             stmt.setInt(2, appointment.getEmployeeId());
             stmt.setInt(3, appointment.getTimeSlotId());
+            stmt.setInt(4, appointment.getUserId());
 
             stmt.executeUpdate();
 

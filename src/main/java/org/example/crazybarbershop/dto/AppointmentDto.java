@@ -20,7 +20,7 @@ public class AppointmentDto {
 
     private String employeeName;
 
-    private LocalDateTime timeSlot;
+    private String timeSlot;
 
     private String status;
 

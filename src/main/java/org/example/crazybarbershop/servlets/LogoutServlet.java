@@ -12,17 +12,14 @@ import java.io.IOException;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Получаем сессию
+
         HttpSession session = request.getSession(false);
 
         if (session != null) {
-            // Удаляем атрибуты сессии
             session.removeAttribute("user");
-            // Инвалидируем сессию
             session.invalidate();
         }
 
-        // Перенаправляем пользователя на страницу входа или главную страницу
         response.sendRedirect(request.getContextPath());
     }
 }

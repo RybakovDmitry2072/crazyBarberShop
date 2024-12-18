@@ -37,6 +37,7 @@ public class AppointmentServlet extends HttpServlet {
 
     private TimeSlotService timeSlotService;
 
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -51,14 +52,10 @@ public class AppointmentServlet extends HttpServlet {
 
         List<CategoryDto> categoryDtoList = categoryService.getAllCatygory();
 
-        System.out.println(categoryDtoList);
-
         Map<EmployeeDto,List<TimeSlotDto>> emploeeDtoListMap = employeeService.getFreeTimeForAllEmployee();
 
         req.setAttribute("categories", categoryDtoList);
         req.setAttribute("employeeTimeSlots", emploeeDtoListMap);
-
-        System.out.println(categoryDtoList);
 
         req.getRequestDispatcher(JSPHelper.getPath("appointment")).forward(req,resp);
     }
@@ -69,8 +66,10 @@ public class AppointmentServlet extends HttpServlet {
         int haircutType = Integer.parseInt(req.getParameter("category"));
         int employeeId = Integer.parseInt(req.getParameter("employeeId"));
         int timeSlotId = Integer.parseInt(req.getParameter("timeSlot"));
+        int userId = Integer.parseInt(req.getParameter("userId"));
 
-        appointmentService.bookAppointment(haircutType, employeeId, timeSlotId);
+
+        appointmentService.bookAppointment(haircutType, employeeId, timeSlotId, userId);
 
         timeSlotService.updateCategoryFlag(timeSlotId, true);
 

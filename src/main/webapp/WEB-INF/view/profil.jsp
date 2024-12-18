@@ -32,11 +32,15 @@
                 <p>Дата: <c:out value="${appointment.timeSlot}"/></p>
                 <p>Мастер: <c:out value="${appointment.employeeName}"/></p>
               </li>
+              <form action="${pageContext.request.contextPath}/profile" method="POST" style="display:inline;">
+                <input type="hidden" name="appointmentId" value="${appointment.id}">
+                <button type="submit" class="cancel-button">Отменить бронь</button>
+              </form>
               <br>
             </c:forEach>
           </c:when>
           <c:otherwise>
-            <p>Вы пока не сделали ни одной записи. <a href="#">Записаться сейчас</a>.</p>
+            <p>Вы пока не сделали ни одной записи. <a href="${pageContext.request.contextPath}/appointment">Записаться сейчас</a>.</p>
           </c:otherwise>
         </c:choose>
       </div>

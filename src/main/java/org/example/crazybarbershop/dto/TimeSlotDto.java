@@ -14,6 +14,6 @@ public class TimeSlotDto {
 
     private int id;
 
-    private LocalDateTime startTime; // Время начала
+    private String startTime;
 
 }

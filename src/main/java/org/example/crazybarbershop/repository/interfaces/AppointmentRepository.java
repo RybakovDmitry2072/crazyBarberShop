@@ -15,6 +15,6 @@ public interface AppointmentRepository {
 
     Optional<List<Appointment>> findAppointmentByUserId(int id);
 
-    void delete(String id);
+    void delete(int id);
 
 }

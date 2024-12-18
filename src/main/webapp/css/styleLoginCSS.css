@@ -80,3 +80,15 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.error-message span {
+    font-size: 1.2em; /* Увеличьте размер шрифта для лучшей видимости */
+    color: red; /* Цвет текста ошибки */
+}

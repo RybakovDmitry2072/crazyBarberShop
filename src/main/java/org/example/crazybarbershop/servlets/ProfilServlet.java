@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.crazybarbershop.Exceptions.CancelAppointmentException;
 import org.example.crazybarbershop.FactoryDto.AppointmentDtoFactory;
 import org.example.crazybarbershop.FactoryDto.UserDtoFactory;
 import org.example.crazybarbershop.dto.*;
@@ -15,9 +16,7 @@ import org.example.crazybarbershop.models.User;
 import org.example.crazybarbershop.services.impl.*;
 import org.example.crazybarbershop.services.interfaces.*;
 import org.example.crazybarbershop.util.JSPHelper;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +51,7 @@ public class ProfilServlet extends HttpServlet {
 
         List<Appointment> appointmentList = appointmentService.getAppointmentsByUserUd(user.getId());
 
+
         List<AppointmentDto> appointmentDtoListCompleted = appointmentList.stream()
                 .filter(appointment -> !appointmentService.isAppointmentCompleted(appointment))
                 .map(appointment -> AppointmentDtoFactory.factoryDto(
@@ -85,6 +85,17 @@ public class ProfilServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        int appointmentId = Integer.parseInt(req.getParameter("appointmentId"));
+        Appointment appointment = appointmentService.getAppointmentById(appointmentId);
+        TimeSlotDto timeSlot = timeSlotService.getTimeSlotById(appointment.getTimeSlotId());
+
+
+        try {
+            appointmentService.cancelAppointment(appointmentId);
+            timeSlotService.updateCategoryFlag(timeSlot.getId(), false);
+            doGet(req, resp);
+        } catch (CancelAppointmentException e){
+            req.setAttribute("CancelAppointmentException", e.getMessage());
+        }
     }
 }

@@ -5,7 +5,7 @@
     <div class="container clearfix">
         <nav class="main-navigation">
             <ul>
-                <li><a href="#">Главная</a></li>
+                <li><a href="${pageContext.request.contextPath}">Главная</a></li>
                 <li><a href="#">Услуги</a></li>
                 <li><a href="#">О нас</a></li>
                 <li><a href="#">Портфолио</a></li>
