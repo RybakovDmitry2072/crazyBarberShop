@@ -11,4 +11,6 @@ public interface UserService {
     User registerUser(UserRegistrationData data);
 
     UserDto getUserById(int userId);
+
+
 }

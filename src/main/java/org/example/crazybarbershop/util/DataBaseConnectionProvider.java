@@ -2,7 +2,6 @@ package org.example.crazybarbershop.util;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import lombok.AccessLevel;
 import lombok.Getter;
 import org.example.crazybarbershop.Exceptions.DbException;
 
@@ -51,40 +50,5 @@ public class DataBaseConnectionProvider {
         return instance;
     }
 
-//    private static String url;
-//    private static String username;
-//    private static String password;
-
-    //возможно не надо
-//    // Статический блок для загрузки свойств при инициализации класса
-//    static {
-//        try (InputStream input = DataBaseConnectionProvider.class.getClassLoader().getResourceAsStream("db.properties")) {
-//            Properties props = new Properties();
-//            if (input == null) {
-//                throw new FileNotFoundException("Sorry, unable to find db.properties");
-//            }
-//            props.load(input);
-//            url = props.getProperty("db.url");
-//            username = props.getProperty("db.user");
-//            password = props.getProperty("db.password");
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    static {
-//        HikariConfig hikariConfig = new HikariConfig("db.properties");
-//        hikariConfig.setUsername(username);
-//        hikariConfig.setPassword(password);
-//        hikariConfig.setJdbcUrl(url);
-//        hikariConfig.setDriverClassName("org.postgresql.Driver");
-//        dataSource = new HikariDataSource(hikariConfig);
-//    }
-
-//
-//    public static Connection getConnection() throws SQLException {
-//        return dataSource.getConnection();
-//    }
 
 }

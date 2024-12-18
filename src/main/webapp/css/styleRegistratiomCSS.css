@@ -18,10 +18,11 @@
 
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "PT Sans Narrow", "Arial", sans-serif;
+    text-transform: uppercase;
+    background: #000000 url("https://i.imgur.com/UhuqbXb.jpg") no-repeat center top;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 .container {
@@ -55,14 +56,14 @@ h2 {
 .form-group button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
+    background-color: #303742;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
 .form-group button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
 
 .radio-group {

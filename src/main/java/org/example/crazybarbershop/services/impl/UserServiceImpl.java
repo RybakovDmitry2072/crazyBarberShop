@@ -1,6 +1,8 @@
 package org.example.crazybarbershop.services.impl;
 
 import lombok.AllArgsConstructor;
+import org.example.crazybarbershop.Exceptions.DbException;
+import org.example.crazybarbershop.Exceptions.UserRegistrationExceprion;
 import org.example.crazybarbershop.Exceptions.ValidatiounException;
 import org.example.crazybarbershop.data.UserRegistrationData;
 import org.example.crazybarbershop.dto.UserDto;
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService {
         if (user.isPresent() && BCrypt.checkpw(password, user.get().getPassword())){
 
             return user.get();
+
         }
 
         throw new IllegalArgumentException("Неверный логин или пароль");
@@ -46,10 +49,13 @@ public class UserServiceImpl implements UserService {
 
         User user = UserMapperData.mapFrom(data);
         user.setPassword(BCrypt.hashpw(user.getPassword(),BCrypt.gensalt()));
-        userRepository.save(user);
 
-        return user;
-
+        try {
+            userRepository.save(user);
+            return user;
+        } catch (DbException e){
+            throw new UserRegistrationExceprion("Failed to register user: " + e.getMessage(), e);
+        }
     }
 
     @Override

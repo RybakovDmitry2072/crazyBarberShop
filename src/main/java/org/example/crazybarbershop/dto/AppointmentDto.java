@@ -16,10 +16,12 @@ public class AppointmentDto {
 
     private String username;
 
-    private String categoriaName;
+    private String categoryName;
 
     private String employeeName;
 
     private LocalDateTime timeSlot;
+
+    private String status;
 
 }

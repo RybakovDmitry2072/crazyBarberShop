@@ -1,32 +1,28 @@
-// gallery.js
-document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('.gallery-content img');
-    const prevButton = document.querySelector('.gallery-prev');
-    const nextButton = document.querySelector('.gallery-next');
-    let currentIndex = 0;
+var slideIndex = 1;
+showSlides(slideIndex);
 
-    function showImage(index) {
-        images.forEach((img, i) => {
-            img.classList.toggle('active', i === index);
-        });
-        prevButton.disabled = (index === 0);
-        nextButton.disabled = (index === images.length - 1);
+// Next/previous controls
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
     }
-
-    prevButton.addEventListener('click', function() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            showImage(currentIndex);
-        }
-    });
-
-    nextButton.addEventListener('click', function() {
-        if (currentIndex < images.length - 1) {
-            currentIndex++;
-            showImage(currentIndex);
-        }
-    });
-
-    // Initial display
-    showImage(currentIndex);
-});
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+}

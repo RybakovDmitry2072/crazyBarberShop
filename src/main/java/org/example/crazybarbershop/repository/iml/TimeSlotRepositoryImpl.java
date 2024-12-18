@@ -29,16 +29,19 @@ public class TimeSlotRepositoryImpl implements TimeSlotRepository {
         TimeSlot timeSlot = null;
         try(Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_TIME_SLOT_BY_ID);
-            ResultSet rs = preparedStatement.executeQuery()) {
+            ) {
+            preparedStatement.setInt(1, timeSlotId);
 
-            if (rs.next()) {
-                timeSlot.setEmployeeId(rs.getInt("employee_id"));
-                timeSlot.setId(rs.getInt("id"));
-                timeSlot.setStartTime((LocalDateTime) rs.getObject("start_time"));
-                timeSlot.setEndTime((LocalDateTime) rs.getObject("end_time"));
-                timeSlot.setBooked(rs.getBoolean("is_booked"));
+            try (ResultSet rs = preparedStatement.executeQuery()){
+                if (rs.next()) {
+                    timeSlot = new TimeSlot();
+                    timeSlot.setEmployeeId(rs.getInt("employee_id"));
+                    timeSlot.setId(rs.getInt("id"));
+                    timeSlot.setStartTime(rs.getTimestamp("start_time").toLocalDateTime());
+                    timeSlot.setEndTime(rs.getTimestamp("end_time").toLocalDateTime());
+                    timeSlot.setBooked(rs.getBoolean("is_booked"));
+                }
             }
-
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -21,7 +21,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto getCategoryById(int id) {
-        return null;
+        Category category = categoryRepository.findById(id).orElseThrow(() ->
+                new IllegalStateException("Not found category by id"));
+
+        CategoryDto categoryDto = CategoryDtoFactory.factoryDto(category);
+
+        return categoryDto;
     }
 
     @Override

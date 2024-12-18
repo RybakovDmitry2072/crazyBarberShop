@@ -60,12 +60,17 @@
         </div>
     </form>
 </div>
-<c:if test="${not empty requestScope.errors}">
+<c:if test="${not empty requestScope.errorsValidationMessage}">
     <div class="error-message">
-        <c:forEach var="error" items="${requestScope.errors}">
+        <c:forEach var="error" items="${requestScope.errorsValidationMessage}">
             <span>${error.message}</span>
             <br>
         </c:forEach>
+    </div>
+</c:if>
+<c:if test="${not empty requestScope.errorRegistrationMessage}">
+    <div class="error-message">
+        <span>${requestScope.errorRegistrationMessage}</span>
     </div>
 </c:if>
 </body>

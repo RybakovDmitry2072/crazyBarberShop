@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.crazybarbershop.Exceptions.UserRegistrationExceprion;
 import org.example.crazybarbershop.Exceptions.ValidatiounException;
 import org.example.crazybarbershop.data.UserRegistrationData;
 import org.example.crazybarbershop.models.User;
@@ -45,18 +46,20 @@ public class RegistrationServlet extends HttpServlet {
                 .birthday(req.getParameter("dob"))
                 .gender(req.getParameter("gender"))
                 .build();
-
         try {
             User user =userService.registerUser(userRegistrationData);
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            resp.sendRedirect(req.getContextPath());
 
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("user", user);
 
         } catch (ValidatiounException e) {
-            req.setAttribute("errors", e.getErrors() );
+            req.setAttribute("errorsValidationMessage", e.getErrors() );
             doGet(req, resp);
 
+        } catch (UserRegistrationExceprion e) {
+            req.setAttribute("errorRegistrationMessage", "Failed to register user");
+            doGet(req, resp);
         }
     }
 }

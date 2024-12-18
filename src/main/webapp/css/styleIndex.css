@@ -221,7 +221,7 @@ body {
 
 .index-content-left {
     float: left;
-    width: 380px;
+    width: 300px;
 }
 
 .index-content-right {
@@ -289,7 +289,7 @@ body {
 
 .gallery {
     position: relative;
-
+    /*width: auto;*/
     height: 260px;
 }
 
@@ -297,8 +297,8 @@ body {
     height: 164px;
     margin: 0;
 
-    background-color: #cccccc;
-    border: 7px solid #ffffff;
+    /*background-color: #cccccc;*/
+    /*border: 7px solid #ffffff;*/
 }
 
 .gallery-content img {

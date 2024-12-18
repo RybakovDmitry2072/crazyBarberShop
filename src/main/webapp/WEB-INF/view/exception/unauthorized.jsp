@@ -12,8 +12,9 @@
   <title>Unauthorized Access</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: "PT Sans Narrow", "Arial", sans-serif;
+      text-transform: uppercase;
+      background: #000000 url("https://i.imgur.com/UhuqbXb.jpg") no-repeat center top;
       display: flex;
       justify-content: center;
       align-items: center;

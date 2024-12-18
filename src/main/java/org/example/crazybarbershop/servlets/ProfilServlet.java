@@ -17,6 +17,9 @@ import org.example.crazybarbershop.services.interfaces.*;
 import org.example.crazybarbershop.util.JSPHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/profile")
 public class ProfilServlet extends HttpServlet {
@@ -45,24 +48,37 @@ public class ProfilServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         UserDto userDto = UserDtoFactory.factory(user);
-
         req.setAttribute("user", userDto);
 
-        Appointment appointment = appointmentService.getUsAppointmentByUserUd(user.getId());
+        List<Appointment> appointmentList = appointmentService.getAppointmentsByUserUd(user.getId());
 
-        CategoryDto categoryDto = categoryService.getCategoryById(appointment.getCategoryId());
+        List<AppointmentDto> appointmentDtoListCompleted = appointmentList.stream()
+                .filter(appointment -> !appointmentService.isAppointmentCompleted(appointment))
+                .map(appointment -> AppointmentDtoFactory.factoryDto(
+                        appointment.getId(),
+                        userDto.getName() + " " + userDto.getSurname(),
+                        categoryService.getCategoryById(appointment.getCategoryId()).getName(),
+                        employeeService.getEmployeeByid(appointment.getEmployeeId()).getName() + " " + employeeService.getEmployeeByid(appointment.getEmployeeId()).getSurname(),
+                        timeSlotService.getTimeSlotById(appointment.getTimeSlotId()).getStartTime(),
+                        appointment.getStatus()
+                ))
+                .collect(Collectors.toList());
 
-        EmployeeDto employeeDto = employeeService.getEmployeeByid(appointment.getEmployeeId());
+        List<AppointmentDto> appointmentDtoIsNotCompleted = appointmentList.stream()
+                .filter(appointment -> appointmentService.isAppointmentCompleted(appointment))
+                .map(appointment -> AppointmentDtoFactory.factoryDto(
+                        appointment.getId(),
+                        userDto.getName() + " " + userDto.getSurname(),
+                        categoryService.getCategoryById(appointment.getCategoryId()).getName(),
+                        employeeService.getEmployeeByid(appointment.getEmployeeId()).getName() +
+                                      " " + employeeService.getEmployeeByid(appointment.getEmployeeId()).getSurname(),
+                        timeSlotService.getTimeSlotById(appointment.getTimeSlotId()).getStartTime(),
+                        appointment.getStatus()
+                ))
+                .collect(Collectors.toList());
 
-        TimeSlotDto timeSlotDto = timeSlotService.getTimeSlotById(appointment.getTimeSlotId());
-
-        AppointmentDto appointmentDto = AppointmentDtoFactory.factoryDto(appointment.getId(),
-                userDto.getName() + " " + userDto.getSurname(),
-                categoryDto.getName(),
-                employeeDto.getName() + " " + employeeDto.getSurname(),
-                timeSlotDto.getStartTime());
-
-        req.setAttribute("appointmentDto", appointmentDto);
+        req.setAttribute("appointmentDtoCompleted", appointmentDtoListCompleted);
+        req.setAttribute("appointmentDtoIsNotCompleted", appointmentDtoIsNotCompleted);
 
         req.getRequestDispatcher(JSPHelper.getPath("profil")).forward(req, resp);
     }
