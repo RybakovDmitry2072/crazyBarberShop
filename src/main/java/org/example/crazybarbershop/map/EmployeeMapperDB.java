@@ -21,6 +21,8 @@ public class EmployeeMapperDB {
                 .birthday(rs.getDate("birthday").toLocalDate())
                 .gender(rs.getString("gender"))
                 .urlImage(rs.getString("url_image"))
+                .about(rs.getString("about"))
+                .experience(rs.getInt("experience"))
                 .build();
     }
 

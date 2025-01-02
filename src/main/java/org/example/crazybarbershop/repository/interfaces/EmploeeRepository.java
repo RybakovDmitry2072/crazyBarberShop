@@ -7,8 +7,11 @@ import java.util.Optional;
 
 public interface EmploeeRepository {
 
-    Optional<List<Employee>> findAll();
-//
+    Optional<List<Employee>> findAllAvailableTimeSlots();
+
+    Optional<List<Employee>> findAllBarber();
+
+    //
 //    void save(Employee employee);
 //
     Optional<Employee> findById(int id);

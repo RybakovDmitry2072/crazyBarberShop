@@ -48,6 +48,12 @@ public class InitListener implements ServletContextListener {
             TimeSlotService timeSlotService = new TimeSlotServiceImpl(timeSlotRepository);
             sce.getServletContext().setAttribute("timeSlotService", timeSlotService);
 
+            PortfolioImgRepository portfolioImgRepository = new PortfolioImgRepositoryImpl(dataSource);
+            PortfolioService portfolioService = new PortfolioServiceImpl(portfolioImgRepository);
+
+            sce.getServletContext().setAttribute("portfolioService", portfolioService);
+
+
 
 
         } catch (DbException e) {
@@ -58,6 +64,5 @@ public class InitListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        // Clean up resources if needed
     }
 }

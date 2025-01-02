@@ -1,54 +1,17 @@
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin: 0 auto;
-}
-
-.form-container label {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.form-container select {
-    margin-bottom: 15px;
-    padding: 5px;
-    width: 100%;
-}
-
-.form-container button {
-    padding: 10px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.form-container button:hover {
-    background-color: #45a049;
-}
-
-/* Основные стили для тела страницы */
-body {
-    font-family: "PT Sans Narrow", "Arial", sans-serif;
-    font-weight: 700;
-    background-color: #f4f4f4;
-    text-transform: uppercase;
-    margin: 0;
-    padding: 20px;
-    background: #000000 url("https://i.imgur.com/UhuqbXb.jpg") no-repeat center top;
+* {
     margin: 0;
     padding: 0;
-
 }
 
-.container {
-    width: 940px;
-    margin: 0 auto;
-    padding: 10px;
-
+body {
+    min-width: 960px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    font-family: "PT Sans Narrow", "Arial", sans-serif;
+    text-transform: uppercase;
+    background: #000000 url("https://i.imgur.com/UhuqbXb.jpg") no-repeat center top;
+    color: #ffffff;
 }
 
 .main-header {
@@ -333,123 +296,263 @@ body {
     src: url(https://fonts.gstatic.com/s/ptsansnarrow/v18/BngSUXNadjH0qYEzV7ab-oWlsbg95AiFW_0.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
-/* Основной контейнер */
 .container {
+    width: 940px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+
+
+
+/* Стили для основного контента */
+.main-content {
+    padding: 60px 40px;
+    text-align: center;
+    border-radius: 15px;
+    margin: 40px auto;
     max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Заголовок */
-h2 {
-    text-align: center;
-    color: white;
+.main-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Список сотрудников */
-.employee-list {
+.main-content h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.main-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+/* Стили для статистики */
+.stats {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Карточка сотрудника */
-.employee-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 15px;
-    padding: 20px;
-    flex: 1 1 calc(33% - 30px);
+.stat {
     text-align: center;
-    transition: transform 0.3s;
-    /* Добавим цвет фона и тень для выделения */
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    flex: 1;
 }
 
-/* Эффект при наведении на карточку */
-.employee-card:hover {
-    transform: translateY(-5px);
-    background-color: #e0f7fa; /* Легкий голубой цвет при наведении */
+.stat .number {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Фото сотрудника */
-.employee-photo {
-    width: 150px; /* Ширина фото */
-    height: 150px; /* Высота фото */
-    object-fit: cover; /* Обрезка изображения */
-    border-radius: 50%; /* Округление изображения */
-    margin-bottom: 15px;
+.stat .label {
+    font-size: 1.2em;
+    margin: 0;
 }
 
-/* Кнопка записи */
-.book-button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 15px;
+/* Стили для особенностей */
+.features {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.feature {
+    text-align: center;
+    flex: 1;
+}
+
+.feature-number {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    margin: 0 auto 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.feature-title {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+/* Стили для тегов */
+.tags {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    text-align: center;
+    margin: 40px auto;
+    max-width: 1200px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tags p {
+    margin: 0;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Стили для мастеров */
+.masters {
+    padding: 60px 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 40px auto;
+    max-width: 1200px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    text-align: center; /* Центрирование текста */
+    position: relative; /* Для позиционирования кнопок */
+    overflow: hidden; /* Скрытие переполнения */
+}
+
+.masters h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.masters p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.masters-list {
+    display: flex;
+    justify-content: flex-start; /* Начальное положение */
+    flex-wrap: nowrap; /* Отключение переноса */
+    transition: transform 0.3s ease-in-out; /* Плавный переход */
+}
+
+.master {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    margin: 20px;
+    border-radius: 15px;
+    flex: 0 0 30%; /* Фиксированная ширина */
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: center; /* Центрирование текста */
+}
+
+.master:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.master-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 0 auto 20px; /* Центрирование изображения */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.master h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    text-align: center; /* Центрирование заголовка */
+}
+
+.master p.experience {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    text-align: center; /* Центрирование опыта */
+}
+
+.master p.description {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 0 20px; /* Добавление отступов по бокам для лучшего выравнивания */
+    text-align: left; /* Выравнивание описания по левому краю */
+}
+
+/* Стили для кнопок прокрутки */
+.scroll-buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.scroll-button {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #000000;
     border: none;
+    padding: 10px 20px;
+    cursor: pointer;
     border-radius: 5px;
-    text-decoration: none;
     transition: background-color 0.3s;
 }
 
-/* Эффект при наведении на кнопку записи */
-.book-button:hover {
-    background-color: #218838;
+.scroll-button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Стили для модального окна */
-.modal {
-    display: none; /* Скрыто по умолчанию */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+.map {
+    text-align: center; /* Центрирование текста */
+    margin: 40px auto; /* Отступы сверху и снизу */
+    max-width: 1200px; /* Максимальная ширина */
+
 }
 
-.modal-content {
-    background-color: white;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+.map h2 {
+    margin-bottom: 20px; /* Отступ снизу для заголовка */
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+#map {
+    display: inline-block; /* Центрирование карты */
+    border-radius: 15px; /* Скругление углов */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Тень для карты */
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-
-
-/* Адаптивные стили */
-@media (max-width: 768px) {
-    .employee-card {
-        flex: 1 1 calc(50% - 30px);
-    }
-}
-
-@media (max-width: 480px) {
-    .employee-card {
-        flex: 1 1 100%;
-    }
+#map iframe {
+    border-radius: 15px; /* Скругление углов iframe */
+    width: 100%; /* Ширина iframe */
+    height: 100%; /* Высота iframe */
 }

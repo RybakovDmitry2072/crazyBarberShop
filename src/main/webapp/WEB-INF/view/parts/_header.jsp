@@ -6,10 +6,9 @@
         <nav class="main-navigation">
             <ul>
                 <li><a href="${pageContext.request.contextPath}">Главная</a></li>
-                <li><a href="#">Услуги</a></li>
-                <li><a href="#">О нас</a></li>
-                <li><a href="#">Портфолио</a></li>
-                <li><a href="#">Контакты</a></li>
+                <li><a href="${pageContext.request.contextPath}/service">Услуги</a></li>
+                <li><a href="${pageContext.request.contextPath}/about">О нас</a></li>
+                <li><a href="${pageContext.request.contextPath}/portfolio">Портфолио</a></li>
                 <li><a href="${pageContext.request.contextPath}/appointment">Записаться</a></li>
             </ul>
         </nav>

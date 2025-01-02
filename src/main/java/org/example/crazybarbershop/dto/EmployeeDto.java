@@ -24,4 +24,8 @@ public class EmployeeDto {
 
     private String urlImage;
 
+    private int experience;
+
+    private String about;
+
 }

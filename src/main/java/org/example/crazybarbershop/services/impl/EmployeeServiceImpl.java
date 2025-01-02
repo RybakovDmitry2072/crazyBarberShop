@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> getAllBarberEmployees() {
-        Optional<List<Employee>> employeeList = employeeRepository.findAll();
+        Optional<List<Employee>> employeeList = employeeRepository.findAllBarber();
         try {
             return employeeList.get().stream()
                     .map(EmployeeDtoFactory::factoryDto)
@@ -46,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Map<EmployeeDto, List<TimeSlotDto>> getFreeTimeForAllEmployee() {
         Map<EmployeeDto, List<TimeSlotDto>> employeeTimeSlotsMapDto = new HashMap<>();
-        List<Employee> employees = employeeRepository.findAll()
+        List<Employee> employees = employeeRepository.findAllAvailableTimeSlots()
                 .orElseThrow( () ->
                         new IllegalStateException("No employees found"));
 

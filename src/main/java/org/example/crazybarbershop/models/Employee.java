@@ -35,6 +35,10 @@ public class Employee {
 
     private List<TimeSlot> timeSlotList;
 
+    private int experience;
+
+    private String about;
+
     //TODO : сделать класс
     public enum Position{
         MANAGER, BARBER

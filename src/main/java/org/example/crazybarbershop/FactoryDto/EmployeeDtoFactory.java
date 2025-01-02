@@ -14,6 +14,8 @@ public class EmployeeDtoFactory {
                 .surname(employee.getName())
                 .position(String.valueOf(employee.getPosition()))
                 .urlImage(employee.getUrlImage())
+                .about(employee.getAbout())
+                .experience(employee.getExperience())
                 .build();
 
     }

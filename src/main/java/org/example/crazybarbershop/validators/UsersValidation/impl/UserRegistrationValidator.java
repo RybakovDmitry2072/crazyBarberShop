@@ -66,17 +66,14 @@ public class UserRegistrationValidator {
             }
         }
 
-        // Проверка email на null и валидность по регулярному выражению
         if (data.getEmail() == null || !EMAIL_PATTERN.matcher(data.getEmail()).matches()) {
             validationResult.add(Error.of("invalid.email", "Email invalid"));
         }
 
-        // Проверка логина на null и валидность по регулярному выражению
         if (data.getLogin() == null || !LOGIN_PATTERN.matcher(data.getLogin()).matches()) {
             validationResult.add(Error.of("invalid.login", "Login invalid"));
         }
 
-        // Проверка номера телефона на null и валидность по регулярному выражению
         if (data.getPhoneNumber() == null || !NUMBER_PATTERN.matcher(data.getPhoneNumber()).matches()) {
             validationResult.add(Error.of("invalid.phoneNumber", "Phone number invalid"));
         }

@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Category {
+public class PortfolioImg {
 
     private int id;
 
-    private String name;
-
-    private int price;
-
-    private String urlImg;
+    private String url;
 
 }

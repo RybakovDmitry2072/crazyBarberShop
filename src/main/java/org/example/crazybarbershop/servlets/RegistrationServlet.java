@@ -46,19 +46,20 @@ public class RegistrationServlet extends HttpServlet {
                 .birthday(req.getParameter("dob"))
                 .gender(req.getParameter("gender"))
                 .build();
+
         try {
             User user =userService.registerUser(userRegistrationData);
-            resp.sendRedirect(req.getContextPath());
-
-            HttpSession httpSession = req.getSession();
-            httpSession.setAttribute("user", user);
+            resp.sendRedirect(req.getContextPath() + "/login");
+        //TODO: сделать переход на логин потому что ошибка , в сессию добавляется модель у которой id = 0
+//            HttpSession httpSession = req.getSession();
+//            httpSession.setAttribute("user", user);
 
         } catch (ValidatiounException e) {
             req.setAttribute("errorsValidationMessage", e.getErrors() );
             doGet(req, resp);
 
         } catch (UserRegistrationExceprion e) {
-            req.setAttribute("errorRegistrationMessage", "Failed to register user");
+            req.setAttribute("errorRegistrationMessage", e);
             doGet(req, resp);
         }
     }

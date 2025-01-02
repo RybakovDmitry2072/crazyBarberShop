@@ -68,7 +68,7 @@
                 ПН-ПТ: с 10:00 до 22:00<br>
                 СБ-ВС: с 10:00 до 19:00
             </p>
-            <a class="btn" href="#">Как проехать</a>
+            <a class="btn" href="https://maps.app.goo.gl/EYWiGkEmZXHSvPwe8" target="_blank">Как проехать</a>
         </div> <!---index-content-left--->
         <div class="index-content-right">
             <h2 class="index-content-title"> Записаться </h2>

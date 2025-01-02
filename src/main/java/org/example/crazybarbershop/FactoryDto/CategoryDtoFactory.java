@@ -10,6 +10,7 @@ public class CategoryDtoFactory {
                 .id(category.getId())
                 .name(category.getName())
                 .price(category.getPrice())
+                .urlImg(category.getUrlImg())
                 .build();
     }
 

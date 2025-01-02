@@ -18,4 +18,6 @@ public class CategoryDto {
 
     private int price;
 
+    private String urlImg;
+
 }

@@ -10,8 +10,8 @@ import javax.sql.DataSource;
 
 public class UserRepositoryIml implements UserRepository {
 
-    private static final String QUERY_SAVE = "INSERT INTO \"users\" (name, surname, login, phone_number, email, password, birthday, gender, role_id) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static final String QUERY_SAVE = "INSERT INTO \"users\" (name, surname, login, phone_number, email, password, birthday, gender) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
 
     private static final String QUERY_BY_LOGIN = "select *, r.role_name as role_name from users u " +
             "join roles r on u.role_id = r.id " +

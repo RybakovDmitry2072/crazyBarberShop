@@ -27,39 +27,69 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
             "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
             "where ts.is_booked = FALSE and p.name = 'BARBER'";
 
+    private static final String QUERY_FIND_ALL_BARBER = "SELECT e.*, p.name AS position_name" +
+            "FROM employees e\n" +
+            "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
+            "where ts.is_booked = FALSE and p.name = 'BARBER'";
+
     private DataSource dataSource;
 
     public EmploeeRepositoryIml(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-@Override
-public Optional<List<Employee>> findAll() {
-    Map<Integer, Employee> employeeMap = new HashMap<>();
+    @Override
+    public Optional<List<Employee>> findAllBarber() {
+        List<Employee> employeeList = new ArrayList<>();
 
-    try (Connection conn = dataSource.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_BARBER_WITH_AVAILABLE_TIME_SLOTS);
-         ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_BARBER_WITH_AVAILABLE_TIME_SLOTS);
+             ResultSet rs = stmt.executeQuery()) {
 
-        while (rs.next()) {
-            int employeeId = rs.getInt("id");
-            Employee employee = employeeMap.get(employeeId);
-            if (employee == null) {
-                employee = EmployeeMapperDB.mapRow(rs);
-                employee.setTimeSlotList(new ArrayList<>()); // Инициализируем список TimeSlot
-                employeeMap.put(employeeId, employee);
+            while (rs.next()) {
+                Employee employee = Employee.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .experience(rs.getInt("experience"))
+                        .about(rs.getString("about"))
+                        .urlImage(rs.getString("url_image"))
+                        .build();
+                employeeList.add(employee);
             }
-            TimeSlot timeSlot = TimeSlotMapperDB.mapRow(rs);
-            timeSlot.setEmployeeId(employeeId);
-            employee.addTimeSlot(timeSlot);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+
+        return Optional.ofNullable(employeeList);
     }
 
-    return Optional.ofNullable(new ArrayList<>(employeeMap.values()));
+    @Override
+    public Optional<List<Employee>> findAllAvailableTimeSlots() {
+        Map<Integer, Employee> employeeMap = new HashMap<>();
 
-}
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_BARBER_WITH_AVAILABLE_TIME_SLOTS);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                int employeeId = rs.getInt("id");
+                Employee employee = employeeMap.get(employeeId);
+                if (employee == null) {
+                    employee = EmployeeMapperDB.mapRow(rs);
+                    employee.setTimeSlotList(new ArrayList<>()); // Инициализируем список TimeSlot
+                    employeeMap.put(employeeId, employee);
+                }
+                TimeSlot timeSlot = TimeSlotMapperDB.mapRow(rs);
+                timeSlot.setEmployeeId(employeeId);
+                employee.addTimeSlot(timeSlot);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Optional.ofNullable(new ArrayList<>(employeeMap.values()));
+
+    }
 
 
 

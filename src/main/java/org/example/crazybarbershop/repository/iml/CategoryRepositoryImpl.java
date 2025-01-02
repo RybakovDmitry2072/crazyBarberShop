@@ -49,7 +49,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
                 category.setPrice(rs.getInt("price"));
-                System.out.println( category);
+                category.setUrlImg(rs.getString("img_url"));
                 categoryList.add(category);
             }
         } catch (SQLException e) {
@@ -70,6 +70,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 category = new Category();
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
+                category.setUrlImg(rs.getString("img_url"));
+                category.setPrice(rs.getInt("price"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
