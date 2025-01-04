@@ -5,17 +5,6 @@
 
 
 <%@include file="/WEB-INF/view/parts/_header.jsp"%>
-
-<%--    <div id="confirmationModal" class="modal">--%>
-<%--        <div class="modal-content">--%>
-<%--            <span class="close-button">&times;</span>--%>
-<%--            <p>Ваш заказ подтвержден!</p>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <script src="script.js"></script>--%>
-
-
-
     <main class="container">
     <div class="index-logo">
         <img src="https://i.imgur.com/RsD2o6O.png" height="204px" width="370px"; alt="Барбершоп Бородинский">

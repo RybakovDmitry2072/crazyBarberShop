@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.crazybarbershop.dto.PortfolioImgDto;
-import org.example.crazybarbershop.services.impl.PortfolioServiceImpl;
+import org.example.crazybarbershop.services.impl.PortfolioImageServiceImpl;
 import org.example.crazybarbershop.services.interfaces.PortfolioService;
 import org.example.crazybarbershop.util.JSPHelper;
 
@@ -22,7 +22,7 @@ public class PortfolioServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        portfolioService = (PortfolioServiceImpl) getServletContext().getAttribute("portfolioService");
+        portfolioService = (PortfolioImageServiceImpl) getServletContext().getAttribute("portfolioService");
     }
 
     @Override

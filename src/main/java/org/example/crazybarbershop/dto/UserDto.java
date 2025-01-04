@@ -31,4 +31,6 @@ public class UserDto {
 
     private String gender;
 
+    private String urlImg;
+
 }

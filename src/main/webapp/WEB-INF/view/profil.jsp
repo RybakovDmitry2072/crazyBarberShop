@@ -9,7 +9,30 @@
 <%@ page import="org.example.crazybarbershop.dto.UserDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#uploadForm').on('submit', function(event) {
+      event.preventDefault();
+      var formData = new FormData(this);
+      $.ajax({
+        url: '${pageContext.request.contextPath}/uploadPhoto',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          alert('Photo uploaded successfully!');
+          // Очистка формы после успешной загрузки
+          $('#uploadForm')[0].reset();
+        },
+        error: function(xhr, status, error) {
+          alert('Error uploading photo: ' + error);
+        }
+      });
+    });
+  });
+</script>
 <t:mainLayuot title="Профиль" cssPath="styleProfil">
   <%@include file="/WEB-INF/view/parts/_header.jsp"%>
 
@@ -20,9 +43,15 @@
         <h2>Профиль пользователя</h2>
         <h3>${user.name} ${user.surname}</h3>
         <p>Добро пожаловать в ваш личный кабинет. Здесь вы можете управлять своими записями, просматривать историю услуг и обновлять данные профиля.</p>
-        <figure>
-          <img src="https://source.unsplash.com/featured/?person" alt="Фото пользователя">
+        <figure class="image-container">
+          <img src="${user.urlImg}" alt="Фото пользователя">
         </figure>
+        <form action="${pageContext.request.contextPath}/profile" method="post" enctype="multipart/form-data">
+          <input type="file" name="file">
+          <input type="hidden" name="action" value="addImage">
+          <input type="hidden" name="dir" value="userImage">
+          <input type="submit" value="Upload">
+        </form>
         <h2>Мои записи</h2>
         <c:choose>
           <c:when test="${not empty appointmentDtoIsNotCompleted}">
@@ -33,6 +62,7 @@
                 <p>Мастер: <c:out value="${appointment.employeeName}"/></p>
               </li>
               <form action="${pageContext.request.contextPath}/profile" method="POST" style="display:inline;">
+                <input type="hidden" name="action" value="cancelAppointment">
                 <input type="hidden" name="appointmentId" value="${appointment.id}">
                 <button type="submit" class="cancel-button">Отменить бронь</button>
               </form>

@@ -1,7 +1,6 @@
 package org.example.crazybarbershop.models;
 
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Data
@@ -19,5 +18,9 @@ public class TimeSlot {
     private LocalDateTime endTime;
 
     private boolean isBooked;
+
+    public boolean getIsBooked() {
+        return isBooked;
+    }
 
 }

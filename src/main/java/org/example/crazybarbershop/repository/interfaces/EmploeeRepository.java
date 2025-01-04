@@ -11,12 +11,15 @@ public interface EmploeeRepository {
 
     Optional<List<Employee>> findAllBarber();
 
-    //
-//    void save(Employee employee);
-//
+    void save(Employee employee);
+
     Optional<Employee> findById(int id);
-//
-//    void delete(String id);
+
+    void delete(int id);
+
+    List<Employee> getAllEmployee();
+
+    void update(Employee employee);
 
 
 }

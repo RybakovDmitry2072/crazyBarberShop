@@ -6,10 +6,8 @@ import org.example.crazybarbershop.models.Employee;
 import org.example.crazybarbershop.models.TimeSlot;
 import org.example.crazybarbershop.repository.interfaces.EmploeeRepository;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -27,10 +25,9 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
             "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
             "where ts.is_booked = FALSE and p.name = 'BARBER'";
 
-    private static final String QUERY_FIND_ALL_BARBER = "SELECT e.*, p.name AS position_name" +
+    private static final String QUERY_FIND_ALL = "SELECT e.*, p.name AS position_name" +
             "FROM employees e\n" +
-            "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
-            "where ts.is_booked = FALSE and p.name = 'BARBER'";
+            "         JOIN time_slots ts ON e.id = ts.employee_id\n";
 
     private DataSource dataSource;
 
@@ -121,6 +118,92 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
         }
 
         return Optional.ofNullable(employee);
+    }
+
+    @Override
+    public void save(Employee employee) {
+        String sql = "INSERT INTO employees (name, surname, phone_number, position_id, email, address, birthday, gender, url_image, about, experience) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, employee.getName());
+            stmt.setString(2, employee.getSurname());
+            stmt.setString(3, employee.getPhoneNumber());
+            stmt.setInt(4, employee.getPositionId(employee.getPosition()));
+            stmt.setString(5, employee.getEmail());
+            stmt.setString(6, employee.getAddress());
+            stmt.setDate(7, Date.valueOf((employee.getBirthday())));
+            stmt.setString(8, employee.getGender());
+            stmt.setString(9, employee.getUrlImage());
+            stmt.setString(10, employee.getAbout());
+            stmt.setInt(11, employee.getExperience());
+
+            stmt.executeUpdate();
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    employee.setId(generatedKeys.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error saving employee", e);
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        String sql = "DELETE FROM employees WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting employee", e);
+        }
+    }
+
+    @Override
+    public List<Employee> getAllEmployee() {
+        List<Employee> employees = new ArrayList<>();
+        String sql = QUERY_FIND_ALL;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Employee employee = EmployeeMapperDB.mapRow(rs);
+                employees.add(employee);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving employees", e);
+        }
+        return employees;
+    }
+
+    @Override
+    public void update(Employee employee) {
+        String sql = "UPDATE employees SET name = ?, surname = ?, phone_number = ?, position_id = ?, email = ?, address = ?, birthday = ?, gender = ?, url_image = ?, about = ?, experience = ? WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, employee.getName());
+            stmt.setString(2, employee.getSurname());
+            stmt.setString(3, employee.getPhoneNumber());
+            stmt.setInt(4, employee.getPositionId(employee.getPosition()));
+            stmt.setString(5, employee.getEmail());
+            stmt.setString(6, employee.getAddress());
+            stmt.setDate(7, java.sql.Date.valueOf((employee.getBirthday())));
+            stmt.setString(8, employee.getGender());
+            stmt.setString(9, employee.getUrlImage());
+            stmt.setString(10, employee.getAbout());
+            stmt.setInt(11, employee.getExperience());
+            stmt.setInt(12, employee.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating employee", e);
+        }
     }
 
 }

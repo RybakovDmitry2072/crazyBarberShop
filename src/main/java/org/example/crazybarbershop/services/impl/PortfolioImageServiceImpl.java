@@ -4,16 +4,15 @@ import lombok.AllArgsConstructor;
 import org.example.crazybarbershop.FactoryDto.PortfolioImgDtoFactory;
 import org.example.crazybarbershop.dto.PortfolioImgDto;
 import org.example.crazybarbershop.models.PortfolioImg;
-import org.example.crazybarbershop.repository.interfaces.PortfolioImgRepository;
 import org.example.crazybarbershop.services.interfaces.PortfolioService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class PortfolioServiceImpl implements PortfolioService {
+public class PortfolioImageServiceImpl implements PortfolioService {
 
-    private PortfolioImgRepository portfolioImgRepository;
+    private org.example.crazybarbershop.repository.interfaces.PortfolioImageService portfolioImgRepository;
 
     @Override
     public List<PortfolioImgDto> getAllPorfolioImg() {
@@ -27,5 +26,19 @@ public class PortfolioServiceImpl implements PortfolioService {
         }
     }
 
+    @Override
+    public void delete(int id) {
+        portfolioImgRepository.delete(id);
+    }
+
+    @Override
+    public void save(PortfolioImg image) {
+        portfolioImgRepository.save(image);
+    }
+
+    @Override
+    public void update(PortfolioImg image) {
+        portfolioImgRepository.update(image);
+    }
 }
 

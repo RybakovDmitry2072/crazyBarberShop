@@ -48,4 +48,26 @@ public class Employee {
         timeSlotList.add(timeSlot);
     }
 
+    public static int getPositionId(Position position) {
+        switch (position) {
+            case MANAGER:
+                return 1;
+            case BARBER:
+                return 2;
+            default:
+                throw new IllegalArgumentException("Unknown position: " + position);
+        }
+    }
+
+    public static Position getIdPosition(int id){
+        switch (id){
+            case 1:
+                return Position.MANAGER;
+            case 2:
+                return Position.BARBER;
+            default:
+                throw new IllegalArgumentException("Unknown position: " + id);
+        }
+    }
+
 }

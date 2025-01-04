@@ -21,6 +21,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmploeeRepository employeeRepository;
 
     @Override
+    public void delete(int id) {
+        employeeRepository.delete(id);
+    }
+
+    @Override
+    public void update(Employee employee) {
+        employeeRepository.update(employee);
+    }
+
+    @Override
+    public List<Employee> getAllEmployee() {
+        return employeeRepository.getAllEmployee();
+    }
+
+    @Override
+    public void save(Employee employee) {
+        employeeRepository.save(employee);
+    }
+
+    @Override
     public List<EmployeeDto> getAllBarberEmployees() {
         Optional<List<Employee>> employeeList = employeeRepository.findAllBarber();
         try {

@@ -3,10 +3,7 @@ package org.example.crazybarbershop.repository.iml;
 import org.example.crazybarbershop.models.TimeSlot;
 import org.example.crazybarbershop.repository.interfaces.TimeSlotRepository;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,22 @@ public class TimeSlotRepositoryImpl implements TimeSlotRepository {
 
     public TimeSlotRepositoryImpl(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @Override
+    public void save(TimeSlot timeSlot) {
+        String sql = "INSERT INTO time_slots (employee_id, start_time, end_time, is_booked) VALUES (?, ?, ?, ?)";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, timeSlot.getEmployeeId());
+            stmt.setTimestamp(2, Timestamp.valueOf(timeSlot.getStartTime()));
+            stmt.setTimestamp(3, Timestamp.valueOf(timeSlot.getEndTime()));
+            stmt.setBoolean(4, timeSlot.getIsBooked());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error adding time slot", e);
+        }
     }
 
     @Override
@@ -48,6 +61,58 @@ public class TimeSlotRepositoryImpl implements TimeSlotRepository {
         }
         return Optional.ofNullable(timeSlot);
     }
+
+    @Override
+    public void delete(int id) {
+        String sql = "DELETE FROM time_slots WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting time slot", e);
+        }
+    }
+
+    @Override
+    public void update(TimeSlot timeSlot) {
+        String sql = "UPDATE time_slots SET employee_id = ?, start_time = ?, end_time = ?, is_booked = ? WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, timeSlot.getEmployeeId());
+            stmt.setTimestamp(2, Timestamp.valueOf(timeSlot.getStartTime()));
+            stmt.setTimestamp(3, Timestamp.valueOf(timeSlot.getEndTime()));
+            stmt.setBoolean(4, timeSlot.getIsBooked());
+            stmt.setInt(5, timeSlot.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating time slot", e);
+        }
+    }
+
+    @Override
+    public List<TimeSlot> getAllTimeSlots() {
+        List<TimeSlot> timeSlots = new ArrayList<>();
+        String sql = "SELECT * FROM time_slots";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                TimeSlot timeSlot = new TimeSlot();
+                timeSlot.setId(rs.getInt("id"));
+                timeSlot.setEmployeeId(rs.getInt("employee_id"));
+                timeSlot.setStartTime(rs.getTimestamp("start_time").toLocalDateTime());
+                timeSlot.setEndTime(rs.getTimestamp("end_time").toLocalDateTime());
+                timeSlot.setBooked(rs.getBoolean("is_booked"));
+                timeSlots.add(timeSlot);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving time slots", e);
+        }
+        return timeSlots;    }
 
     @Override
     public void updateCategoryFlag(int timeSlotId, boolean newFlag) {

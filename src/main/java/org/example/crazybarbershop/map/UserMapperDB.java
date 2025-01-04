@@ -17,6 +17,7 @@ public class UserMapperDB {
         user.setPassword(rs.getString("password"));
         user.setBirthday(rs.getDate("birthday").toLocalDate());
         user.setGender(rs.getString("gender"));
+        user.setUrlImg(rs.getString("url_img"));
         user.setRole(User.Role.valueOf(rs.getString("role_name")));
         return user;
     }

@@ -13,6 +13,8 @@ public interface CategoryRepository {
 
     void save(Category category);
 
-    void delete(String id);
+    void delete(int id);
+
+    void upadate(Category category);
 
 }

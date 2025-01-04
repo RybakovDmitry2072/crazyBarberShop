@@ -7,9 +7,15 @@ import java.util.Optional;
 
 public interface TimeSlotRepository {
 
-//    List<TimeSlot> findAvailableSlotsByEmployeeId(int employeeId);
+    void delete(int id);
+
+    void update(TimeSlot timeSlot);
+
+    List<TimeSlot> getAllTimeSlots();
 
     void updateCategoryFlag(int timeSlotId, boolean newFlag);
 
     Optional<TimeSlot> getTimeSlotByid(int timeSlotId);
+
+    void save(TimeSlot timeSlot);
 }

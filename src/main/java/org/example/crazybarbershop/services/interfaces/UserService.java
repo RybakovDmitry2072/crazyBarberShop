@@ -4,13 +4,21 @@ import org.example.crazybarbershop.data.UserRegistrationData;
 import org.example.crazybarbershop.dto.UserDto;
 import org.example.crazybarbershop.models.User;
 
+import java.util.List;
+
 public interface UserService {
 
     User auth(String login, String password);
 
     User registerUser(UserRegistrationData data);
 
-    UserDto getUserById(int userId);
+    User findById(int userId);
+
+    List<User> findAll();
+
+    void updateUser(User user);
+
+    void deleteUser(int userId);
 
 
 }

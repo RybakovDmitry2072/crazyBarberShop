@@ -14,6 +14,7 @@ import org.example.crazybarbershop.validators.UsersValidation.ValidationResult;
 import org.example.crazybarbershop.validators.UsersValidation.impl.UserRegistrationValidator;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -59,7 +60,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(int userId) {
-        return null;
+    public User findById(int userId) {
+        return userRepository.findById(userId);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public void updateUser(User user) {
+
+        userRepository.update(user);
+    }
+
+    public void deleteUser(int userId) {
+        userRepository.delete(userId);
     }
 }

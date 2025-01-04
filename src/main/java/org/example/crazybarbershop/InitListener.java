@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebListener;
 import org.example.crazybarbershop.Exceptions.DbException;
 import org.example.crazybarbershop.repository.iml.*;
 import org.example.crazybarbershop.repository.interfaces.*;
+import org.example.crazybarbershop.repository.interfaces.PortfolioImageService;
 import org.example.crazybarbershop.services.impl.*;
 import org.example.crazybarbershop.services.interfaces.*;
 import org.example.crazybarbershop.util.DataBaseConnectionProvider;
@@ -48,10 +49,13 @@ public class InitListener implements ServletContextListener {
             TimeSlotService timeSlotService = new TimeSlotServiceImpl(timeSlotRepository);
             sce.getServletContext().setAttribute("timeSlotService", timeSlotService);
 
-            PortfolioImgRepository portfolioImgRepository = new PortfolioImgRepositoryImpl(dataSource);
-            PortfolioService portfolioService = new PortfolioServiceImpl(portfolioImgRepository);
+            PortfolioImageService portfolioImgRepository = new PortfolioImageRepositoryImpl(dataSource);
+            PortfolioService portfolioService = new PortfolioImageServiceImpl(portfolioImgRepository);
 
             sce.getServletContext().setAttribute("portfolioService", portfolioService);
+
+            UploadImageService uploadImageService = new UploadImageServiceImpl();
+            sce.getServletContext().setAttribute("uploadImageService", uploadImageService);
 
 
 

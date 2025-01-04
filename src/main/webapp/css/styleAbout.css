@@ -307,10 +307,10 @@ body {
 
 /* Стили для основного контента */
 .main-content {
-    padding: 60px 40px;
+    padding: 30px 40px;
     text-align: center;
     border-radius: 15px;
-    margin: 40px auto;
+    margin: 5px auto;
     max-width: 1200px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
@@ -345,7 +345,7 @@ body {
     justify-content: space-around;
     background-color: rgba(255, 255, 255, 0.1);
     padding: 40px 20px;
-    margin: 40px auto;
+    margin: 5px auto;
     max-width: 1200px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
@@ -403,23 +403,6 @@ body {
 .feature-title {
     font-size: 1.2em;
     margin: 0;
-}
-
-/* Стили для тегов */
-.tags {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 40px 20px;
-    text-align: center;
-    margin: 40px auto;
-    max-width: 1200px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-.tags p {
-    margin: 0;
-    font-size: 1.2em;
-    line-height: 1.6;
 }
 
 /* Стили для мастеров */

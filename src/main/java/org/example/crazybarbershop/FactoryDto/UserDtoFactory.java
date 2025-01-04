@@ -16,6 +16,7 @@ public class UserDtoFactory {
                 .gender(user.getGender())
                 .birthday(user.getBirthday())
                 .password(user.getPassword())
+                .urlImg(user.getUrlImg())
                 .build();
 
     }

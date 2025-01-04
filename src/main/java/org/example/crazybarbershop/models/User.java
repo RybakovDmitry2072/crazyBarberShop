@@ -29,10 +29,21 @@ public class User {
 
     private Role role;
 
+    private String urlImg;
+
     public enum Role {
         ADMIN, USER
     }
-
+    public int getRoleId(User.Role role) {
+        switch (role) {
+            case ADMIN:
+                return 1;
+            case USER:
+                return 2;
+            default:
+                throw new IllegalArgumentException("Unknown role: " + role);
+        }
+    }
 }
 
 

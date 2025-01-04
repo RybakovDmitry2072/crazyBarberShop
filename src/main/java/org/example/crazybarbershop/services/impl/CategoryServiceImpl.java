@@ -20,6 +20,21 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
+    public void save(Category category) {
+        categoryRepository.save(category);
+    }
+
+    @Override
+    public void delete(int id) {
+        categoryRepository.delete(id);
+    }
+
+    @Override
+    public void update(Category category) {
+        categoryRepository.upadate(category);
+    }
+
+    @Override
     public CategoryDto getCategoryById(int id) {
         Category category = categoryRepository.findById(id).orElseThrow(() ->
                 new IllegalStateException("Not found category by id"));
