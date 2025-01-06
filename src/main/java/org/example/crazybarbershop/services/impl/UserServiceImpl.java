@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return user;
         } catch (DbException e){
-            throw new UserRegistrationExceprion("Failed to register user: " + e.getMessage(), e);
+            throw new UserRegistrationExceprion("Ошибка при регистрации: " + e.getMessage(), e);
         }
     }
 

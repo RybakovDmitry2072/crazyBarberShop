@@ -101,7 +101,6 @@ public class ProfilServlet extends HttpServlet {
 
             case "addImage":
                 String dir = req.getParameter("dir");
-                System.out.println("Directory parameter: " + dir); // Логирование
                 if (dir == null || dir.isEmpty()) {
                     resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Directory parameter is missing");
                     return;
@@ -113,8 +112,6 @@ public class ProfilServlet extends HttpServlet {
                     directory.mkdirs();
                 }
 
-                System.out.println("Upload directory: " + uploadDir); // Логирование
-
                 try {
                     Part filePart = req.getPart("file");
                     String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
@@ -122,12 +119,14 @@ public class ProfilServlet extends HttpServlet {
                     uploadImageService.saveImageToStorage(filePart, uploadDir, uniqueFileName);
                     HttpSession httpSession = req.getSession();
                     User user = (User) httpSession.getAttribute("user");
-                    user.setUrlImg(uploadDir + "/" + uniqueFileName);
+                    user.setUrlImg("static" + "/" + dir + "/" + uniqueFileName);
+
+//                    user.setUrlImg(uploadDir + "/" + uniqueFileName);
                     userService.updateUser(user);
                     resp.sendRedirect(req.getContextPath() + "/profile");
 
                 } catch (Exception e) {
-                    e.printStackTrace(); // Логирование ошибки
+                    e.printStackTrace();
                     resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error uploading photo: " + e.getMessage());
                 }
                 return;

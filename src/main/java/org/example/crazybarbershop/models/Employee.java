@@ -25,8 +25,6 @@ public class Employee {
 
     private String email;
 
-    private String address;
-
     private LocalDate birthday;
 
     private String gender;

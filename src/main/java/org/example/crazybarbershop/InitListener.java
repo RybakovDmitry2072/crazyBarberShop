@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 @WebListener
 public class InitListener implements ServletContextListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(InitListener.class);
-
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
@@ -57,16 +55,12 @@ public class InitListener implements ServletContextListener {
             UploadImageService uploadImageService = new UploadImageServiceImpl();
             sce.getServletContext().setAttribute("uploadImageService", uploadImageService);
 
+            GalleryImageRepository galleryImageRepository = new GalleryImageRepositoryImpl(dataSource);
+            GalleryImageService galleryImageService = new GalleryImageServiceImpl(galleryImageRepository);
+            sce.getServletContext().setAttribute("galleryImageService", galleryImageService);
 
-
-
-        } catch (DbException e) {
-            logger.error("Failed to initialize services: " + e.getMessage(), e);
+        } catch (Exception e) {
             throw new RuntimeException("Failed to initialize services", e);
         }
-    }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
     }
 }

@@ -13,15 +13,20 @@ import java.util.Optional;
 
 public class UserRepositoryIml implements UserRepository {
 
-    private static final String QUERY_SAVE = "INSERT INTO \"users\" (name, surname, login, phone_number, email, password, birthday, gender, role_id, url_img) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+    private static final String QUERY_SAVE = "INSERT INTO \"users\" (name, surname, login, phone_number, email, password, birthday, gender) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
+
     private static final String QUERY_BY_LOGIN = "SELECT *, r.role_name AS role_name FROM users u " +
             "JOIN roles r ON u.role_id = r.id " +
             "WHERE u.login = ?";
+
     private static final String QUERY_FIND_ALL = "SELECT *, r.role_name AS role_name FROM users u " +
             "JOIN roles r ON u.role_id = r.id";
-    private static final String QUERY_UPDATE = "UPDATE users SET name = ?, surname = ?, login = ?, phone_number = ?, email = ?, birthday = ?, gender = ?, role_id = ?, url_img = ? WHERE id = ?";
+
+    private static final String QUERY_UPDATE = "UPDATE users SET name = ?, surname = ?, login = ?, phone_number = ?, email = ?, birthday = ?, gender = ?, role_id = ? WHERE id = ?";
+
     private static final String QUERY_DELETE = "DELETE FROM users WHERE id = ?";
+
     private static final String QUERY_FIND_BY_ID = "SELECT *, r.role_name AS role_name FROM users u " +
             "JOIN roles r ON u.role_id = r.id " +
             "WHERE u.id = ?";
@@ -45,8 +50,6 @@ public class UserRepositoryIml implements UserRepository {
             stmt.setString(6, user.getPassword());
             stmt.setObject(7, user.getBirthday());
             stmt.setString(8, user.getGender());
-            stmt.setInt(9, user.getRoleId(user.getRole()));
-            stmt.setString(10, user.getUrlImg());
 
             stmt.executeUpdate();
 
@@ -121,8 +124,7 @@ public class UserRepositoryIml implements UserRepository {
             stmt.setDate(6, Date.valueOf(user.getBirthday()));
             stmt.setString(7, user.getGender());
             stmt.setInt(8, user.getRoleId(user.getRole()));
-            stmt.setString(9, user.getUrlImg());
-            stmt.setInt(10, user.getId());
+            stmt.setInt(9, user.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

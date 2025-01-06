@@ -33,7 +33,7 @@ public class PortfolioServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         portfolioService = (PortfolioImageServiceImpl) getServletContext().getAttribute("portfolioService");
-        uploadImageService = new UploadImageServiceImpl();
+        uploadImageService = (UploadImageServiceImpl) getServletContext().getAttribute("uploadImageService");
     }
 
     @Override
@@ -56,19 +56,16 @@ public class PortfolioServlet extends HttpServlet {
         switch (action) {
             case "addImage":
                 String dir = req.getParameter("dir");
-                System.out.println("Directory parameter: " + dir); // Логирование
                 if (dir == null || dir.isEmpty()) {
                     resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Directory parameter is missing");
                     return;
                 }
 
-                String uploadDir = "/Users/rybakovdmitry/crazyBarberShop/src/main/webapp/static/" + dir;
+                String uploadDir = "/Users/rybakovdmitry/crazyBarberShop/src/main/webapp/" + dir;
                 File directory = new File(uploadDir);
                 if (!directory.exists()) {
                     directory.mkdirs();
                 }
-
-                System.out.println("Upload directory: " + uploadDir); // Логирование
 
                 try {
                     Part filePart = req.getPart("file");
@@ -80,12 +77,12 @@ public class PortfolioServlet extends HttpServlet {
                     String uniqueFileName = UUID.randomUUID().toString() + "_" + originalFileName;
                     uploadImageService.saveImageToStorage(filePart, uploadDir, uniqueFileName);
                     PortfolioImg portfolioImg = PortfolioImg.builder()
-                            .url(uploadDir + "/" + uniqueFileName)
+                            .url(dir + "/" + uniqueFileName)
                             .build();
                     portfolioService.save(portfolioImg);
                     resp.setStatus(HttpServletResponse.SC_OK);
                 } catch (Exception e) {
-                    e.printStackTrace(); // Логирование ошибки
+                    e.printStackTrace();
                     resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error uploading photo: " + e.getMessage());
                 }
                 return;
@@ -106,7 +103,6 @@ public class PortfolioServlet extends HttpServlet {
                 return;
             default:
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action parameter");
-                return;
         }
     }
 

@@ -44,6 +44,10 @@ public class User {
                 throw new IllegalArgumentException("Unknown role: " + role);
         }
     }
+
+    public boolean isAdmin(){
+        return this.role == Role.ADMIN;
+    }
 }
 
 

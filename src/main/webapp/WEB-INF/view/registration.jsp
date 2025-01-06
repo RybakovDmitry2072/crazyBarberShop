@@ -58,6 +58,9 @@
         <div class="form-group">
             <button type="submit">Зарегистрироваться</button>
         </div>
+        <div class="form-group">
+            <a href="${pageContext.request.contextPath}">Главная</a>
+        </div>
     </form>
 </div>
 <c:if test="${not empty requestScope.errorsValidationMessage}">

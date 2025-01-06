@@ -33,7 +33,7 @@ public class CategoryServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         categoryService = (CategoryServiceImpl) getServletContext().getAttribute("categoryService");
-        uploadImageService = new UploadImageServiceImpl();
+        uploadImageService = (UploadImageServiceImpl) getServletContext().getAttribute("uploadImageService");
     }
 
     @Override
@@ -61,13 +61,15 @@ public class CategoryServlet extends HttpServlet {
 
                     String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
                     String uniqueFileName = UUID.randomUUID().toString() + "_" + originalFileName;
-                    String uploadDir = dir + File.separator + uniqueFileName;
+                    String uploadDir = "static" + "/" + dir + "/" + uniqueFileName;
+//                    String uploadDir = dir + File.separator + uniqueFileName;
 
                     uploadImageService.saveImageToStorage(filePart, dir, uniqueFileName);
 
                     Category category = new Category();
                     category.setName(name);
                     category.setPrice(price);
+
                     category.setUrlImg(uploadDir);
 
                     categoryService.save(category);
@@ -98,7 +100,6 @@ public class CategoryServlet extends HttpServlet {
 
             default:
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action parameter");
-                return;
         }
     }
 }

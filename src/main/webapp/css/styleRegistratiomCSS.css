@@ -1,19 +1,19 @@
 .error-message {
-    color: #d9534f; /* Красный цвет для ошибок */
-    background-color: #f2dede; /* Светло-красный фон */
-    border: 1px solid #ebccd1; /* Красная рамка */
-    padding: 10px; /* Отступы */
-    border-radius: 5px; /* Скругление углов */
-    margin-bottom: 15px; /* Отступ снизу */
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .error-message span {
-    display: block; /* Сделать каждую ошибку блоком */
-    margin-bottom: 5px; /* Небольшой отступ между ошибками */
+    display: block;
+    margin-bottom: 5px;
 }
 
 .error-message span:last-child {
-    margin-bottom: 0; /* Убираем отступ для последнего элемента */
+    margin-bottom: 0;
 }
 
 
@@ -60,6 +60,20 @@ h2 {
     color: #fff;
     border: none;
     cursor: pointer;
+}
+.form-group a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #303742;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-group a:hover {
+    background-color: #0056b3;
 }
 
 .form-group button:hover {

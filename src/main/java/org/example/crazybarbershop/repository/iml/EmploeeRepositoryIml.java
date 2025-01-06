@@ -8,7 +8,6 @@ import org.example.crazybarbershop.repository.interfaces.EmploeeRepository;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.*;
 
 public class EmploeeRepositoryIml implements EmploeeRepository {
@@ -25,9 +24,14 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
             "         JOIN time_slots ts ON e.id = ts.employee_id\n" +
             "where ts.is_booked = FALSE and p.name = 'BARBER'";
 
-    private static final String QUERY_FIND_ALL = "SELECT e.*, p.name AS position_name" +
+    private static final String QUERY_FIND_ALL = "SELECT e.*, p.name AS position_name " +
+            "FROM employees e " +
+            "JOIN positions p ON e.position_id = p.id";
+
+    private static final String QUERY_FIND_ALL_BARBER = "SELECT e.*, p.name AS position_name " +
             "FROM employees e\n" +
-            "         JOIN time_slots ts ON e.id = ts.employee_id\n";
+            "         JOIN positions p ON e.position_id = p.id\n" +
+            "WHERE position_id = 2";
 
     private DataSource dataSource;
 
@@ -40,18 +44,14 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
         List<Employee> employeeList = new ArrayList<>();
 
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_BARBER_WITH_AVAILABLE_TIME_SLOTS);
+             PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_ALL_BARBER);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Employee employee = Employee.builder()
-                        .id(rs.getInt("id"))
-                        .name(rs.getString("name"))
-                        .experience(rs.getInt("experience"))
-                        .about(rs.getString("about"))
-                        .urlImage(rs.getString("url_image"))
-                        .build();
+
+                Employee employee = EmployeeMapperDB.mapRow(rs);
                 employeeList.add(employee);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
 
     @Override
     public Optional<Employee> findById(int id) {
-        Employee employee = null; // Инициализация переменной employee
+        Employee employee = null;
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(QUERY_FIND_BY_ID)) {
@@ -122,21 +122,20 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
 
     @Override
     public void save(Employee employee) {
-        String sql = "INSERT INTO employees (name, surname, phone_number, position_id, email, address, birthday, gender, url_image, about, experience) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO employees (name, surname, phone_number, position_id, email, birthday, gender, url_image, about, experience) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, employee.getName());
             stmt.setString(2, employee.getSurname());
             stmt.setString(3, employee.getPhoneNumber());
-            stmt.setInt(4, employee.getPositionId(employee.getPosition()));
+            stmt.setInt(4, Employee.getPositionId(employee.getPosition()));
             stmt.setString(5, employee.getEmail());
-            stmt.setString(6, employee.getAddress());
-            stmt.setDate(7, Date.valueOf((employee.getBirthday())));
-            stmt.setString(8, employee.getGender());
-            stmt.setString(9, employee.getUrlImage());
-            stmt.setString(10, employee.getAbout());
-            stmt.setInt(11, employee.getExperience());
+            stmt.setDate(6, Date.valueOf((employee.getBirthday())));
+            stmt.setString(7, employee.getGender());
+            stmt.setString(8, employee.getUrlImage());
+            stmt.setString(9, employee.getAbout());
+            stmt.setInt(10, employee.getExperience());
 
             stmt.executeUpdate();
 
@@ -169,7 +168,7 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
         String sql = QUERY_FIND_ALL;
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery(sql)) {
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Employee employee = EmployeeMapperDB.mapRow(rs);
@@ -183,22 +182,21 @@ public class EmploeeRepositoryIml implements EmploeeRepository {
 
     @Override
     public void update(Employee employee) {
-        String sql = "UPDATE employees SET name = ?, surname = ?, phone_number = ?, position_id = ?, email = ?, address = ?, birthday = ?, gender = ?, url_image = ?, about = ?, experience = ? WHERE id = ?";
+        String sql = "UPDATE employees SET name = ?, surname = ?, phone_number = ?, position_id = ?, email = ?, birthday = ?, gender = ?, url_image = ?, about = ?, experience = ? WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, employee.getName());
             stmt.setString(2, employee.getSurname());
             stmt.setString(3, employee.getPhoneNumber());
-            stmt.setInt(4, employee.getPositionId(employee.getPosition()));
+            stmt.setInt(4, Employee.getPositionId(employee.getPosition()));
             stmt.setString(5, employee.getEmail());
-            stmt.setString(6, employee.getAddress());
-            stmt.setDate(7, java.sql.Date.valueOf((employee.getBirthday())));
-            stmt.setString(8, employee.getGender());
-            stmt.setString(9, employee.getUrlImage());
-            stmt.setString(10, employee.getAbout());
-            stmt.setInt(11, employee.getExperience());
-            stmt.setInt(12, employee.getId());
+            stmt.setDate(6, Date.valueOf((employee.getBirthday())));
+            stmt.setString(7, employee.getGender());
+            stmt.setString(8, employee.getUrlImage());
+            stmt.setString(9, employee.getAbout());
+            stmt.setInt(10, employee.getExperience());
+            stmt.setInt(11, employee.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

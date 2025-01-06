@@ -91,6 +91,8 @@
   </script>
 </head>
 <body>
+<%@include file="/WEB-INF/view/adminView/parts/_header.jsp"%>
+
 <h1>Manage Categories</h1>
 <form id="addCategoryForm" enctype="multipart/form-data">
   <input type="hidden" name="action" value="addCategory">

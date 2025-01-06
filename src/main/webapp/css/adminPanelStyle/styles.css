@@ -1,10 +1,10 @@
-/* Общие стили для страницы */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
+
 form {
     max-width: 600px;
     margin: 20px auto;
@@ -13,11 +13,13 @@ form {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
 }
+
 input[type="file"] {
     display: block;
     margin-bottom: 20px;
@@ -26,6 +28,7 @@ input[type="file"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 input[type="submit"] {
     display: block;
     width: 100%;
@@ -37,9 +40,11 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 16px;
 }
+
 input[type="submit"]:hover {
     background-color: #45a049;
 }
+
 h1 {
     text-align: center;
     margin-top: 20px;
@@ -100,6 +105,7 @@ tr:hover {
 .edit-user:hover, .save-user:hover, .delete-user:hover {
     opacity: 0.8;
 }
+
 #add-category-button {
     display: block;
     margin: 20px auto;
@@ -111,6 +117,56 @@ tr:hover {
     cursor: pointer;
     font-size: 16px;
 }
+
 #add-category-button:hover {
     background-color: #45a049;
+}
+
+
+.main-header {
+    background-color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Стили для навигационного меню */
+.main-header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.main-header nav ul li {
+    margin: 0 20px;
+}
+
+.main-header nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.main-header nav ul li a:hover {
+    color: #007BFF;
+    border-bottom: 2px solid #007BFF;
+}
+
+/* Стили для активного элемента меню */
+.main-header nav ul li a.active {
+    color: #007BFF;
+    border-bottom: 2px solid #007BFF;
+}
+
+/* Добавление отступов к основному контенту */
+.main-content {
+    padding: 20px;
 }

@@ -22,10 +22,31 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 
     private static final String QUERY_DELETE = "DELETE FROM appointments WHERE id = ?";
 
+    private static final String QUERY_FIND_ALL = "SELECT * FROM appointments";
+
     private DataSource dataSource;
 
     public AppointmentRepositoryImpl(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @Override
+    public void update(Appointment appointment) {
+        String sql = "UPDATE appointments SET user_id = ?, category_id = ?, employee_id = ?, time_slot_id = ?, status = ? WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, appointment.getUserId());
+            stmt.setInt(2, appointment.getCategoryId());
+            stmt.setInt(3, appointment.getEmployeeId());
+            stmt.setInt(4, appointment.getTimeSlotId());
+            stmt.setString(5, appointment.getStatus());
+            stmt.setInt(6, appointment.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating appointment", e);
+        }
     }
 
     @Override
@@ -81,7 +102,24 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 
     @Override
     public List<Appointment> findAll() {
-        return List.of();
+        List<Appointment> appointmentList = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(QUERY_FIND_ALL)){
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Appointment appointment = new Appointment();
+                appointment.setId(rs.getInt("id"));
+                appointment.setUserId(rs.getInt("user_id"));
+                appointment.setEmployeeId(rs.getInt("employee_id"));
+                appointment.setStatus(rs.getString("status"));
+                appointment.setCategoryId(rs.getInt("category_id"));
+                appointment.setTimeSlotId(rs.getInt("time_slot_id"));
+                appointmentList.add(appointment);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return appointmentList;
     }
 
     @Override

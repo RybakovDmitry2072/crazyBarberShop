@@ -42,16 +42,19 @@
       <div class="profile-info">
         <h2>Профиль пользователя</h2>
         <h3>${user.name} ${user.surname}</h3>
-        <p>Добро пожаловать в ваш личный кабинет. Здесь вы можете управлять своими записями, просматривать историю услуг и обновлять данные профиля.</p>
+        <p>Добро пожаловать в ваш личный кабинет.</p>
         <figure class="image-container">
           <img src="${user.urlImg}" alt="Фото пользователя">
         </figure>
-        <form action="${pageContext.request.contextPath}/profile" method="post" enctype="multipart/form-data">
-          <input type="file" name="file">
-          <input type="hidden" name="action" value="addImage">
-          <input type="hidden" name="dir" value="userImage">
-          <input type="submit" value="Upload">
-        </form>
+
+          <p>Вы можете загрузить свою фотографию, чтобы она отображалась в вашем профиле, или обновить ее.</p>
+          <form action="${pageContext.request.contextPath}/profile" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="hidden" name="action" value="addImage">
+            <input type="hidden" name="dir" value="userImage">
+            <input type="submit" value="Загрузить" >
+          </form>
+
         <h2>Мои записи</h2>
         <c:choose>
           <c:when test="${not empty appointmentDtoIsNotCompleted}">
@@ -87,7 +90,6 @@
             </li>
           </c:forEach>
         </ul>
-        <a href="#">Посмотреть всю историю</a>
       </div>
     </div>
   </main>

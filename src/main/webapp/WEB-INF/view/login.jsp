@@ -21,6 +21,9 @@
             <div class="register">
                 <a href="${pageContext.request.contextPath}/registration" class="btn btn-register">Зарегистрироваться</a>
             </div>
+            <div class="register">
+                <a href="${pageContext.request.contextPath}" class="btn btn-register">Главная</a>
+            </div>
         </form>
         <c:if test="${not empty error}">
             <div class="error-message">

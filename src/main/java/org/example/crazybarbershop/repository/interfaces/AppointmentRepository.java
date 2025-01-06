@@ -17,4 +17,6 @@ public interface AppointmentRepository {
 
     void delete(int id);
 
+    void update(Appointment appointment);
+
 }

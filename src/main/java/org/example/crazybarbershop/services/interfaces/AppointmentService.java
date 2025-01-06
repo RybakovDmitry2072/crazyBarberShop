@@ -18,4 +18,9 @@ public interface AppointmentService {
 
     Appointment getAppointmentById(int id);
 
+    List<Appointment> getAllAppointments();
+
+    void update(Appointment appointment);
+
+    void delete(int id);
 }

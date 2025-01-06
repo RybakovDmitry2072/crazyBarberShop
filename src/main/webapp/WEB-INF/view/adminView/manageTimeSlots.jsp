@@ -130,6 +130,8 @@
   </script>
 </head>
 <body>
+<%@include file="/WEB-INF/view/adminView/parts/_header.jsp"%>
+
 <h1>Manage Time Slots</h1>
 <form id="addTimeSlotForm" enctype="multipart/form-data">
   <input type="hidden" name="action" value="addTimeSlot">

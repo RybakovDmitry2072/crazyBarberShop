@@ -75,6 +75,7 @@
     </script>
 </head>
 <body>
+<%@include file="/WEB-INF/view/adminView/parts/_header.jsp"%>
 <h1>Manage Users</h1>
 <table border="1">
     <tr>

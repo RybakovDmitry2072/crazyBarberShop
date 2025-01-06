@@ -17,7 +17,6 @@ public class EmployeeMapperDB {
                 .phoneNumber(rs.getString("phone_number"))
                 .position(Employee.Position.valueOf(rs.getString("position_name")))
                 .email(rs.getString("email"))
-                .address(rs.getString("address"))
                 .birthday(rs.getDate("birthday").toLocalDate())
                 .gender(rs.getString("gender"))
                 .urlImage(rs.getString("url_image"))

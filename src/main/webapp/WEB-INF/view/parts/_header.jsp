@@ -20,7 +20,9 @@
             <c:if test="${not empty sessionScope.user}">
                 <a class="user-login" href="${pageContext.request.contextPath}/logout">Выход</a>
                 <a class="user-profil" href="${pageContext.request.contextPath}/profile">Профиль</a>
-
+                <c:if test="${sessionScope.user.role == 'ADMIN'}">
+                    <a class="user-profil" href="${pageContext.request.contextPath}/admin/users">Админ панель</a>
+                </c:if>
             </c:if>
         </div>
     </div>

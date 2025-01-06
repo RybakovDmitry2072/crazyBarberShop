@@ -22,6 +22,21 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentRepository appointmentRepository;
 
     @Override
+    public void delete(int id) {
+        appointmentRepository.delete(id);
+    }
+
+    @Override
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.findAll();
+    }
+
+    @Override
+    public void update(Appointment appointment) {
+        appointmentRepository.update(appointment);
+    }
+
+    @Override
     public Appointment getAppointmentById(int id) {
         Appointment appointment = appointmentRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("not found appointment"));

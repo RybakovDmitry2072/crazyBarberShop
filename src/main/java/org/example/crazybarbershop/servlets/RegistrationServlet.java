@@ -48,7 +48,7 @@ public class RegistrationServlet extends HttpServlet {
                 .build();
 
         try {
-            User user =userService.registerUser(userRegistrationData);
+            userService.registerUser(userRegistrationData);
             resp.sendRedirect(req.getContextPath() + "/login");
         //TODO: сделать переход на логин потому что ошибка , в сессию добавляется модель у которой id = 0
 //            HttpSession httpSession = req.getSession();
