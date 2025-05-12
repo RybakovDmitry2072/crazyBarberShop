@@ -1,0 +1,89 @@
+.error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.error-message span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.error-message span:last-child {
+    margin-bottom: 0;
+}
+
+
+body {
+    font-family: "PT Sans Narrow", "Arial", sans-serif;
+    text-transform: uppercase;
+    background: #000000 url("https://i.imgur.com/UhuqbXb.jpg") no-repeat center top;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #303742;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.form-group a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #303742;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-group a:hover {
+    background-color: #0056b3;
+}
+
+.form-group button:hover {
+    background-color: #0056b3;
+}
+
+.radio-group {
+    margin-bottom: 15px;
+}
+
+.radio-group label {
+    margin-right: 10px;
+}
